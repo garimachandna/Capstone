@@ -1,3 +1,60 @@
+.carousel.carousel-slider {
+  overflow: inherit;
+}
+
+.carousel .control-next.control-arrow{
+  display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.carousel .control-next.control-arrow:hover{
+  background-color: transparent;
+  /* right: -190px; */
+}
+
+.carousel .control-prev.control-arrow{
+  display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.carousel .control-prev.control-arrow:hover {
+  background-color: transparent;
+  /* left: -190px; */
+}
+
+.carousel .control-arrow, .carousel.carousel-slider .control-arrow{
+  /* opacity: 1; */
+  /* display: flex;
+    /* justify-content: space-around; */
+    /* align-items: center; */
+    padding: 20px;
+    height: -webkit-fill-available !important;
+}
+
+.carousel .control-next.control-arrow:before {
+  content: '';
+  border: solid #662c53;
+  border-width: 0 8px 8px 0;
+  display: inline-block;
+  padding: 14px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.carousel .control-prev.control-arrow:before {
+  content: '';
+  border: solid #662c53;
+  border-width: 0 8px 8px 0;
+  display: inline-block;
+  padding: 14px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
 .card {
     display: flex;
     justify-content: center;
@@ -25,3 +82,8 @@
   button{
     height: fit-content !important;
   }
+
+
+.carousel .slide .legend{
+  background-color: #662c53;
+}

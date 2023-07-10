@@ -1,0 +1,79 @@
+/* 
+
+const card = {
+    width: "18rem",
+    margin: "10px",
+    padding: "10px",
+    border: "1px solid black",
+    borderRadius: "10px",
+    boxShadow: "5px 5px 5px 5px #888888",
+    backgroundColor: "#f5f5f5",
+    },
+    cardTitle = {
+    fontSize: "20px",
+    fontWeight: "bold",
+    },
+    cardText = {
+    fontSize: "15px",
+    fontWeight: "bold",
+    },
+    cardText1 = {
+    fontSize: "15px",
+    fontWeight: "bold",
+    }
+    ;
+    
+*/
+
+
+.card-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 10px;
+    margin: 10px;
+    width: 100%;
+    
+}
+
+.cards{
+    width: 21rem;
+    height: auto;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-body{
+    position: relative;
+}
+
+.card-title{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ede4e4;
+    backdrop-filter: blur(10px);
+}
+
+.cards img{
+    width: -webkit-fill-available;
+    transition: 0.5s all ease-in-out; 
+
+}
+
+.cards:hover{
+    transform: scale(1.1) translate(0px, -10px);
+    /* transition: ease-out 0.5s; */
+    /* transition: transform 1s; */
+
+}
+
+.cards:hover img{
+    transform: scale(1.5);
+}
+
+
+

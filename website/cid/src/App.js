@@ -10,6 +10,7 @@ import Dashboard from "./pages/user/dashboard";
 import PrivateRoute from "./components/layout/routes/private";
 import ForgotPassword from "./pages/auth/forgotpassword";
 import Uploadcsv from "./pages/Uploadcsv";
+import Viewresult from "./pages/Viewresult";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About />} />
         <Route path="/uploadcsv" element={<Uploadcsv />} />
+        <Route path="/viewresult" element={<Viewresult />} />
         {/* <Route path="/contact" element={<Contact />} /> */}
         {/* <Route path="/policy" element={<Policy />}></Route> */}
         <Route path="*" element={<Pagenotfound />}></Route>

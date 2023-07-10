@@ -23,12 +23,20 @@ main{
     /* width: -webkit-fill-available; */
     /* position: relative; */
     min-height: 100vh;
+    /* position: relative !important; */
+}
+
+.layout{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 #container{
     height: auto;
     display: flex;
     flex-direction: column;
+    margin-top: auto;
     /* justify-content: space-between; */
     /* min-height: 100vh; */
 }
@@ -152,7 +160,9 @@ main{
     background: linear-gradient(to left, rgb(159, 132, 141), rgb(65, 3, 34));
     text-align: center;
     width: -webkit-fill-available;
-    
+    /* position: absolute;
+    top: 100%; */
+    margin-top: auto;
     
 }
 
@@ -165,6 +175,10 @@ main{
 .footer a:hover{
     color: #ffefba;
     border-bottom: 1px solid #ffefba;
+}
+
+.footer svg :hover{
+    fill: palevioletred;
 }
 
 

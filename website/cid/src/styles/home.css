@@ -1,4 +1,4 @@
-.home::before{
+/* .home::before{ */
 /* 
   width: -webkit-fill-available;
   height:  -webkit-fill-available ;
@@ -28,7 +28,7 @@
     z-index: -1;
     filter:  brightness(0.4) grayscale() !important;
     background-image: url('../../public/images/crime/handcuffs.jpg') !important; */
-  }
+  /* } */
 
   .home{
     height: inherit;

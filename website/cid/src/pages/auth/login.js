@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 // import "../../../src/styles/AuthStyles.css";
 import "../../styles/login.css";
 import { useAuth } from "../../context/auth";
+import { AiTwotoneMail, AiFillLock } from "react-icons/ai";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -50,7 +51,7 @@ const Login = () => {
         <form className="container" onSubmit={handleSubmit}>
           <div className="forminfo">
             <div classname="box" className="mb-3">
-              <i class="icon fa-solid fa-envelope"></i>
+              <AiTwotoneMail />
               <input
                 type="email"
                 value={email}
@@ -62,7 +63,7 @@ const Login = () => {
               />
             </div>
             <div classname="box" className="mb-3">
-              <i class="fa-solid fa-key"></i>
+              <AiFillLock />
               <input
                 type="password"
                 value={password}

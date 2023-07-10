@@ -47,6 +47,11 @@ function Header() {
                 Upload Complaints
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink to="/viewresult" className="nav-link ">
+                View Results
+              </NavLink>
+            </li>
             {!auth?.user ? (
               <>
                 <li className="nav-item">

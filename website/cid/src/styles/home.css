@@ -1,0 +1,133 @@
+/* .home::before{ */
+/* 
+  width: -webkit-fill-available;
+  height:  -webkit-fill-available ;
+  position: absolute;
+  display: block;
+  content: '';
+  
+  z-index: -1;
+  background-image: url('../../public/images/crime/handcuffs.jpg');
+  background-position: center;
+  
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: brightness(0.4) grayscale(); */
+
+  /* background-color: rgba(0, 0, 0, 0.5);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(2px);
+    z-index: -1;
+    filter:  brightness(0.4) grayscale() !important;
+    background-image: url('../../public/images/crime/handcuffs.jpg') !important; */
+  /* } */
+
+  .home{
+    height: inherit;
+    /* scroll-behavior: smooth;
+    overflow-y: scroll; */
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    font-weight: 500;
+}
+
+.carouselcard{
+  height: fit-content;
+  width: -webkit-fill-available;
+}
+
+.info{
+  height: 30%;
+  width: -webkit-fill-available;
+  position: relative;
+  display: block;
+  /* margin-top: 5em; */
+  /* background-image: url('../../public/images/crime/handcuffs.jpg'); */
+  /* background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent; */
+  /* filter:  brightness(0.4) grayscale() !important; */
+  /* color: white; */
+}
+
+.info ::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height:100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(2px);
+  z-index: -1;
+  filter:  invert() brightness(0.3) grayscale() !important;
+  background-image: url('../../public/images/crime/handcuffs.jpg');
+     
+}
+
+.info p, .info h1, .info h2, .info h3, .info h4, .info h5, .info h6{
+  /* color: white; */
+  margin-bottom: 0px;
+  padding: 15px 5px;
+}
+
+.info h1, .info h2, .info h3, .info h4, .info h5, .info h6{
+  margin: 20px;
+  font-size: xx-large;
+  font-style: oblique;
+  color: rgb(237, 218, 114);
+  
+}
+
+.info p{
+  color: rgb(237, 234, 221);
+  margin-left: 20px;
+}
+
+
+/* 
+.background-image{
+  width: 100%;
+  height: 100% ;
+  position: absolute;
+  z-index: -1;
+  background-size: cover;
+  filter: brightness(0.4) grayscale();
+      background-image: url('../../public/images/crime/handcuffs.jpg') !important;
+    
+} */
+
+
+
+#title{
+  text-align: center;
+  font-weight: 500;
+  font-family: 'Caprasimo', cursive;
+  color: #b39946;
+  font-size: 60px;
+}
+
+
+.legend{
+  font-family: 'Poppins' !important;
+  font-weight: bold;
+  font-size: large !important;
+}

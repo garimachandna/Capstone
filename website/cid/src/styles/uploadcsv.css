@@ -59,11 +59,11 @@ body {
     font-size: medium;
   }
 
-
+/* 
   #container{
-    /* height: -webkit-fill-available; */
-  }
-
+    /* height: -webkit-fill-available;  }
+*/
+  
   #upload{
     display: flex;
     flex-direction: column;

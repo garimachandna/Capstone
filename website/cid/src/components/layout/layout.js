@@ -32,7 +32,7 @@ Layout.defaultProps = {
   title: "CID",
   description: "MERN Stack project",
   keywords: "mern, react, node, mongodb",
-  author: "Team 9",
+  author: "CPG 162",
 };
 
 export default Layout;

@@ -15,6 +15,7 @@ function Header() {
 
   console.log(auth);
   console.log(auth.user);
+  if (auth.user) console.log(auth.user.role);
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -42,18 +43,44 @@ function Header() {
                 Home
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink to="/uploadcsv" className="nav-link ">
-                Upload Complaints
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/viewresult" className="nav-link ">
-                View Results
-              </NavLink>
-            </li>
+
+            {auth?.user?.role === 2 ? (
+              <li className="nav-item">
+                <NavLink to="/viewresult" className="nav-link ">
+                  View Results
+                </NavLink>
+              </li>
+            ) : (
+              <></>
+            )}
+            {auth?.user?.role === 0 ? (
+              <>
+                <li className="nav-item">
+                  <NavLink to="/filecomplaint" className="nav-link ">
+                    Lodge a Complaint
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <></>
+            )}
+
+            {auth?.user?.role === 1 ? (
+              <li className="nav-item">
+                <NavLink to="/register" className="nav-link ">
+                  Register
+                </NavLink>
+              </li>
+            ) : (
+              <></>
+            )}
             {!auth?.user ? (
               <>
+                <li className="nav-item">
+                  <NavLink to="/registeruser" className="nav-link">
+                    Register
+                  </NavLink>
+                </li>
                 <li className="nav-item">
                   <NavLink to="/login" className="nav-link">
                     Login

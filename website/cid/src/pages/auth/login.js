@@ -18,7 +18,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      Axios.post(`/api/login`, {
+      Axios.post(`http://localhost:8080/api/login`, {
         email,
         password,
       }).then((res) => {
@@ -28,6 +28,7 @@ const Login = () => {
             ...auth,
             user: res.data.user,
             token: res.data.token,
+            role: res.data.user.role,
           });
           localStorage.setItem("auth", JSON.stringify(res.data));
           navigate(location.state || "/");
@@ -50,7 +51,7 @@ const Login = () => {
         </div>
         <form className="container" onSubmit={handleSubmit}>
           <div className="forminfo">
-            <div classname="box" className="mb-3">
+            <div className="box mb-3">
               <AiTwotoneMail />
               <input
                 type="email"
@@ -62,7 +63,7 @@ const Login = () => {
                 required
               />
             </div>
-            <div classname="box" className="mb-3">
+            <div className="box mb-3">
               <AiFillLock />
               <input
                 type="password"
@@ -76,7 +77,7 @@ const Login = () => {
             </div>
 
             <div className="buttons mb-3">
-              <button
+              {/* <button
                 type="button"
                 className="btn btn-primary"
                 onClick={() => {
@@ -84,8 +85,12 @@ const Login = () => {
                 }}
               >
                 Forgot Password
-              </button>
-              <button type="submit" className="btn btn-primary">
+              </button> */}
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onSubmit={handleSubmit}
+              >
                 LOGIN
               </button>
             </div>

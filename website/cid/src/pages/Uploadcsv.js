@@ -29,16 +29,17 @@ class Uploadcsv extends Component {
       );
 
       // Details of the uploaded file
-      console.log(this.state.selectedFile);
+      console.log("selected file\n", this.state.selectedFile);
 
       // Request made to the backend api
       // Send formData object
+      console.log("before ", formData.get("myFile"));
       const response = await axios.post(
         "http://localhost:8080/api/uploadfile",
         formData
       );
 
-      console.log(response.data);
+      console.log("status: ", response);
       if (response.data.status === "success") {
         //show success message
         response.data.message = "File uploaded successfully";
@@ -46,7 +47,9 @@ class Uploadcsv extends Component {
         //show error message
         response.data.message = "File upload failed";
       }
-      alert(response.data.message);
+
+      alert("File uploaded successfully.");
+      // alert(response.data.message);
     } catch (e) {
       alert("Please choose a file before uploading");
     }

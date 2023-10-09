@@ -1,25 +1,36 @@
 import React from "react";
 import Layout from "../components/layout/layout";
-
+import "../styles/about.css";
 const About = () => {
   return (
     <Layout title={"About us - Ecommerce app"}>
       <div className="row contactus ">
         <div className="col-md-6 ">
           <img
+            className="aboutimg"
             src="/images/about.jpeg"
             alt="contactus"
-            style={{ width: "100%" }}
+            style={{
+              // width: "100%"
+              padding: "30px",
+            }}
           />
         </div>
         <div className="col-md-4">
-          <p className="text-justify mt-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-            officiis obcaecati esse tempore unde ratione, eveniet mollitia,
-            perferendis eius temporibus dicta blanditiis doloremque explicabo
-            quasi sunt vero optio cum aperiam vel consectetur! Laborum enim
-            accusantium atque, excepturi sapiente amet! Tenetur ducimus aut
-            commodi illum quidem neque tempora nam.
+          <p className="aboutp text-justify mt-2">
+            StreamlineCID is dedicated to revolutionizing the complaint
+            classification process within the Criminal Investigation Department
+            (CID). We understand the critical role accurate complaint
+            classification plays in ensuring effective law enforcement and
+            investigative outcomes. Our mission is to streamline and optimize
+            the classification system, leveraging cutting-edge technologies to
+            deliver faster, more accurate, and data-driven solutions.
+          </p>
+          <p className="aboutp text-justify">
+            For further information, collaboration opportunities, or inquiries,
+            please reach out to us via our contact form or email us at
+            admin@admin.com. Follow us on social media channels to stay updated
+            with the latest developments and industry insights.
           </p>
         </div>
       </div>

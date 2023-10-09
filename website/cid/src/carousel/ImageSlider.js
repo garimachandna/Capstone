@@ -10,7 +10,7 @@ const imageData = [
     alt: "Image1",
   },
   {
-    label: "Missing Persons",
+    label: "Kidnapping",
     url: "images/carousel/missing.jpg",
     alt: "Image2",
   },

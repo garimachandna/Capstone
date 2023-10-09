@@ -13,11 +13,7 @@ const Home = () => {
           {/* <div className="background-image"></div> */}
         </div>
         <div className="info">
-          <p>
-            we can show here in the form of cards/carousel or something, the
-            latest news or the types of crimes we are dealing with
-          </p>
-          <h2>Our Mission</h2>
+          {/* <h2>Our Mission</h2> */}
           <h2>Our Vision</h2>
           <p>
             StreamlineCID is dedicated to revolutionizing the complaint
@@ -32,8 +28,8 @@ const Home = () => {
           <p>
             For further information, collaboration opportunities, or inquiries,
             please reach out to us via our contact form or email us at
-            info@streamlinecid.com. Follow us on social media channels to stay
-            updated with the latest developments and industry insights.
+            admin@admin.com. Follow us on social media channels to stay updated
+            with the latest developments and industry insights.
           </p>
         </div>
       </div>

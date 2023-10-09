@@ -1,0 +1,119 @@
+.viewcategory::before{
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat-y;
+    filter: blur(2px);
+    z-index: -1;
+    filter:  brightness(0.3)  !important;
+
+    background-image: url('../../public/images/crime/hands.jpg');
+
+}
+
+.viewcategory{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* align-items: center;
+    align-content: center; */
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+.category-heading{
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 auto;
+    padding: 30px;
+    color: #c46464;
+}
+
+small{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    margin: 0 auto;
+    padding: 0;
+    color: #9b7272;
+}
+
+.complaints::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(2px);
+    z-index: -1;
+    filter:  invert() brightness(0.3) grayscale() !important;
+
+    background-image: url('../../public/images/crime/handcuffs.jpg');
+}
+
+
+.complaints{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 auto;
+    /* width: 100%; */
+    height: 100%;
+    padding: 0 40px;
+    color: #9b7272;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+
+.complaint{
+    padding: 5px 20px;
+    text-align: left;
+    color: #9b7272;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+table{
+    border-collapse: collapse;
+    /* width: 100%; */
+    text-align: left;
+    margin: 0px 30px;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+th{
+    background-color: #655e5e;
+    color: white;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #080808;
+}
+tr{
+    border-bottom: 1px solid #dddddd;
+}
+
+td{
+    padding: 10px;
+}
+
+.downloadbutton{
+    margin-bottom: 50px;
+    align-self: center;
+}

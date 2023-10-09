@@ -1,0 +1,182 @@
+.filecomplaint::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* filter:  invert() brightness(1) blur(2px); */
+    z-index: -1;
+    filter: blur(2px);
+    background-image: url('../../public/images/crime/lawnorder.jpg') !important;
+  }
+
+body {
+    background: #171c1f;
+    color: #fff;
+    margin: 0;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+/* .filecomplaint::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(2px);
+    z-index: -1;
+    background-image: url('../../public/images/crime/gun.jpg');
+  } */
+
+.filecomplaint{
+    
+    width: inherit;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    font-weight: 500;
+}
+
+#headings{
+  margin: 67px;
+  margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: flex-start;
+    width: -webkit-fill-available;
+  }
+
+
+  
+  #file{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    border: 2px dashed rgb(116, 20, 63);
+    padding: 45px 222px;
+    padding-bottom: 30px;
+  }
+
+  #file .buttons{
+    height: 100%;
+  }
+  
+ #file button {
+    height: 100%;
+    width: 50%;
+    margin-top: 49px;
+    transition: all 0.2s ease-out;
+    margin: 4px;
+    cursor: pointer;
+    background: rgb(116, 20, 63);
+    border: 0;
+    color: #fff;
+    min-width: 90px;
+    padding: 8px 12px;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-size: 0.6rem;
+    border: 1px solid #fff;
+  }
+  
+ #file button:hover {
+    background: none;
+    color: #fff;
+  }
+  
+  button:active {
+    background: #fa3402;
+  }
+
+
+  main{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    
+  }
+
+#file{
+    margin-bottom: 60px !important;
+    width: -webkit-fill-available;
+    padding: 0 !important;
+}
+
+
+textarea{
+    resize: none;
+    height: 100px;
+    width: 100%;
+    border: 2px solid rgb(116, 20, 63);
+    border-radius: 5px;
+    /* padding: 10px; */
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+    margin-left: 5px;
+    background-color: transparent;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+
+.filecomplaint{
+    width: -webkit-fill-available !important;
+    margin: 70px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.box{
+    justify-content: flex-start !important;
+    padding: 5px;
+    padding-right: 30px;
+    padding-left: 20px;
+}
+
+#file .myform-container{
+    justify-content: flex-start;
+    padding-left: 50px;
+    padding-top: 15px;
+    width: -webkit-fill-available;
+}
+
+#file .container{
+    width: -webkit-fill-available;
+}
+
+#file .forminfo div{
+    width: auto;
+}
+
+#file .box input{
+    margin-left: 5px;
+}

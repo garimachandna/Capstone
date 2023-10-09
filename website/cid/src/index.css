@@ -36,7 +36,7 @@ main{
     height: auto;
     display: flex;
     flex-direction: column;
-    margin-top: auto;
+    /* margin-top: auto; */
     /* justify-content: space-between; */
     /* min-height: 100vh; */
 }

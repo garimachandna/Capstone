@@ -6,7 +6,7 @@ function Footer() {
   return (
     <div className="footer">
       <h1 className="text-center">
-        Made With <AiFillHeart /> by Team 9
+        Made With <AiFillHeart /> by CPG 162
       </h1>
       <p className="text-center mt-3">
         <Link to="/about">About</Link>

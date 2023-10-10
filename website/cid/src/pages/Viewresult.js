@@ -57,7 +57,7 @@ const Viewresult = () => {
   return (
     <Layout>
       <div className="viewresult">
-        <h1 id="title">View Result</h1>
+        <h1 id="title">View Complaints</h1>
         <div className="card-container">{card}</div>
       </div>
     </Layout>

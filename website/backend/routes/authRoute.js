@@ -7,6 +7,8 @@ const {
   uploadController,
   predictController,
   viewController,
+  priorityController,
+  deleteController,
 } = require("../controllers/authController.js");
 const fileUpload = require("express-fileupload");
 
@@ -41,6 +43,12 @@ router.post(
 
 //view route
 router.post("/viewcategory", viewController);
+
+//update priority route
+router.post("/updatepriority", requireSignIn, priorityController);
+
+//delete complaint route
+router.post("/deletecomplaint", requireSignIn, deleteController);
 
 //protected route
 router.get("/user-auth", requireSignIn, (req, res) => {

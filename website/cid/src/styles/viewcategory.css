@@ -30,12 +30,23 @@
 }
 
 .category-heading{
-    font-size: 50px;
+    font-size: 30px;
     font-weight: bold;
-    text-align: center;
-    margin: 0 auto;
-    padding: 30px;
+    /* text-align: center; */
+    margin: 30px;
+    /* padding: 30px; */
     color: #c46464;
+    text-transform: capitalize;
+}
+
+#priority-heading{
+    font-size: 30px;
+    margin: 30px ;
+    /* text-align: center; */
+    font-weight: bold;
+    color: crimson;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: capitalize;
 }
 
 small{
@@ -116,4 +127,67 @@ td{
 .downloadbutton{
     margin-bottom: 50px;
     align-self: center;
+    width: auto;
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    /* change case to sentence case */
+    /* text-transform: capitalize; */
+
+}
+
+
+.no-complaints{
+    font-size: 50px;
+    font-style: oblique;
+    text-align: center;
+    padding: 100px;
+    /* margin: auto; */
+    font-family: 'Roboto', sans-serif;
+    
+}
+
+
+
+.priority-checkbox{
+    height: 15px;
+    width: 15px;
+    margin: 0 10px;
+    cursor: pointer;
+    color: #705b5b;
+}
+
+.delete-icon{
+    color: #9b7272;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    /* change case to sentence case */
+    /* text-transform: capitalize; */
+}
+
+.delete-icon:hover{
+    color: #c46464;
+}
+
+.no-border{
+    border-style : hidden!important;
+}
+
+
+.prioritycomplaints{
+    color: burlywood;
+}
+
+th{
+    color: black;
+}
+
+.prioritydownload{
+    margin-bottom: 100px;
+  
 }

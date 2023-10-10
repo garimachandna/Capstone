@@ -47,7 +47,7 @@ function Header() {
             {auth?.user?.role === 2 ? (
               <li className="nav-item">
                 <NavLink to="/viewresult" className="nav-link ">
-                  View Results
+                  View Complaints
                 </NavLink>
               </li>
             ) : (

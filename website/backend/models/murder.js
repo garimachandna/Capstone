@@ -13,6 +13,10 @@ const murderSchema = mongoose.Schema(
     name: String,
     address: String,
     phone: Number,
+    priority: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

@@ -341,13 +341,90 @@ const viewController = async (req, res) => {
   const cidcomplaints = model.Complaint;
 
   // store all complaints from the database in this variable
-
-  const complaints = await cidcomplaints.find();
+  //store all the complaints where priority = false in complaints, true in prioritycomplaints
+  const complaints = await cidcomplaints
+    .find({ priority: false })
+    .sort({ _id: -1 });
+  const prioritycomplaints = await cidcomplaints
+    .find({ priority: true })
+    .sort({ _id: -1 });
   console.log(complaints);
+  console.log(prioritycomplaints);
   res.status(200).send({
     complaints: complaints,
+    prioritycomplaints: prioritycomplaints,
     success: true,
   });
+};
+
+const priorityController = async (req, res) => {
+  const { category, id } = req.body;
+  console.log("printing here ", category, id);
+  const models = {
+    accident: accidentModel,
+    murder: murderModel,
+    kidnap: kidnapModel,
+    rape: rapeModel,
+    theft: theftModel,
+  };
+
+  const model = models[category];
+  const cidcomplaints = model.Complaint;
+
+  // store all complaints from the database in this variable
+
+  try {
+    const originalcomplaint = await cidcomplaints.findOne({ _id: id });
+    // console.log("original complaint ", originalcomplaint);
+    console.log("original priority: ", originalcomplaint.priority);
+
+    let complaint = await cidcomplaints.findOneAndUpdate({ _id: id }, [
+      { $set: { priority: { $not: "$priority" } } },
+    ]);
+
+    complaint = await cidcomplaints.findOne({ _id: id });
+
+    // console.log("changed complaint, ", complaint);
+    console.log("changed priority: ", complaint.priority);
+
+    console.log("priority update successfully");
+    res.status(200).send({
+      complaint: complaint,
+      success: true,
+    });
+  } catch (error) {
+    console.log("Couldnot update priority, ", error);
+  }
+};
+
+const deleteController = async (req, res) => {
+  const { category, id } = req.body;
+  console.log("printing here ", category, id);
+  const models = {
+    accident: accidentModel,
+    murder: murderModel,
+    kidnap: kidnapModel,
+    rape: rapeModel,
+    theft: theftModel,
+  };
+
+  const model = models[category];
+  const cidcomplaints = model.Complaint;
+
+  try {
+    await cidcomplaints.deleteOne({ _id: id });
+    console.log("Deleted Successfully");
+    res.status(200).send({
+      success: true,
+      message: "Complaint deleted from database",
+    });
+  } catch (e) {
+    console.log("Deleted Unsuccessful");
+    res.status(200).send({
+      success: false,
+      message: "Complaint not deleted",
+    });
+  }
 };
 
 module.exports = {
@@ -358,4 +435,6 @@ module.exports = {
   predictController,
   complaintController,
   viewController,
+  priorityController,
+  deleteController,
 };

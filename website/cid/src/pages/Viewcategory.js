@@ -5,17 +5,19 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Layout from "../components/layout/layout";
+// import delete icon from react-icons
+import { FaTrash } from "react-icons/fa";
 
 const Viewcategory = () => {
   const location = useLocation();
   let [complaints, setComplaints] = useState([]);
+  let [priorityComplaints, setPriorityComplaints] = useState([]);
   let category = location.state.category;
   console.log(category);
   useEffect(() => {
     let ignore = false;
 
     if (!ignore) {
-      //   console.log("category ", category);
       getComplaints(category);
     }
     return () => {
@@ -28,10 +30,12 @@ const Viewcategory = () => {
     try {
       Axios.post("http://localhost:8080/api/viewcategory", { category }).then(
         (res) => {
-          //   console.log("res ", res.data);
           if (res && res.data.success) {
             console.log("res ", res.data);
             setComplaints(res.data.complaints);
+            setPriorityComplaints(res.data.prioritycomplaints);
+            // console.log("complaints ", complaints);
+            // console.log("priority complaints ", priorityComplaints);
           } else {
             console.log("some error occured");
           }
@@ -40,6 +44,75 @@ const Viewcategory = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handlePriorityChange = async (category, id) => {
+    console.log("category ", category);
+    console.log("id ", id);
+    // setComplaints(
+    //   complaints.map((complaint) => {
+    //     if (complaint._id === id) {
+    //       complaint.priority = !complaint.priority;
+    //       priority = complaint.priority;
+    //     }
+    //     return complaint;
+    //   })
+    // );
+
+    console.log("calling priority api");
+    await Axios.post("http://localhost:8080/api/updatepriority", {
+      category,
+      id,
+    }).then((res) => {
+      if (res && res.data.success) {
+        console.log("priority updated");
+        console.log("res ", res.data.complaint.priority);
+        const priority = res.data.complaint.priority;
+        //add the complaint to priorityComplaints and remove from complaints
+        if (priority === true) {
+          console.log("priority is true");
+          setPriorityComplaints([...priorityComplaints, res.data.complaint]);
+          setComplaints(
+            complaints.filter((complaint) => {
+              return complaint._id !== res.data.complaint._id;
+            })
+          );
+        } else {
+          setComplaints([...complaints, res.data.complaint]);
+          setPriorityComplaints(
+            priorityComplaints.filter((complaint) => {
+              return complaint._id !== res.data.complaint._id;
+            })
+          );
+        }
+      } else {
+        console.log("some error occured");
+      }
+    });
+  };
+
+  const handleDelete = (category, id) => {
+    setComplaints(
+      complaints.filter((complaint) => {
+        return complaint._id !== id;
+      })
+    );
+    setPriorityComplaints(
+      priorityComplaints.filter((complaint) => {
+        return complaint._id !== id;
+      })
+    );
+
+    Axios.post("http://localhost:8080/api/deletecomplaint", {
+      category,
+      id,
+    }).then((res) => {
+      if (res && res.data.success) {
+        console.log("complaint deleted");
+      } else {
+        console.log("some error occured");
+      }
+    });
   };
 
   const ComplaintsList = ({ complaints }) => {
@@ -52,17 +125,33 @@ const Viewcategory = () => {
             <th>Complaint Address</th>
             <th>Complainant Phone</th>
             <th>Complaint</th>
+            <th>Priority</th>
+            {/* <th>Delete</th> */}
             {/* Add more table headers for other complaint details */}
           </tr>
         </thead>
         <tbody>
           {complaints.map((complaint, index) => (
-            <tr key={index}>
+            <tr key={index + 1}>
               <td>{index + 1}</td>
               <td>{complaint.name}</td>
               <td>{complaint.address}</td>
               <td>{complaint.phone}</td>
               <td>{complaint.complaint}</td>
+              <td>
+                <input
+                  type="checkbox"
+                  className="priority-checkbox"
+                  checked={complaint.priority}
+                  onChange={() => handlePriorityChange(category, complaint._id)}
+                />
+              </td>
+              <td className="no-border">
+                <FaTrash
+                  className="delete-icon"
+                  onClick={() => handleDelete(category, complaint._id)}
+                />
+              </td>
               {/* Add more table cells for other complaint details */}
             </tr>
           ))}
@@ -72,7 +161,7 @@ const Viewcategory = () => {
   };
 
   //download the complaints in csv format
-  const downloadComplaintsCSV = () => {
+  const downloadComplaintsCSV = (complaints) => {
     const csvHeader =
       "S. No.,Complainant Name,Complaint Address,Complainant Phone,Complaint\n";
     const csvData = complaints.map((complaint, index) => {
@@ -110,20 +199,38 @@ const Viewcategory = () => {
   return (
     <Layout>
       <div className="viewcategory">
-        <h1 className="category-heading">{category}s</h1>
-        {/* <ol className="complaints">
-          {complaints.map((complaint) => (
-            <li className="complaint" key={complaint._id}>
-              <small>{complaint.complaint}</small>
-            </li>
-          ))}
-        </ol> */}
-
-        <ComplaintsList complaints={complaints} />
-        {complaints.length > 0 && (
-          <button onClick={downloadComplaintsCSV} className="downloadbutton">
-            Download Complaints (CSV)
+        {priorityComplaints.length > 0 && (
+          <h2 id="priority-heading">Priority {category}s</h2>
+        )}
+        {priorityComplaints.length > 0 && (
+          <div className="prioritycomplaints">
+            <ComplaintsList complaints={priorityComplaints} />
+          </div>
+        )}
+        {priorityComplaints.length > 0 && (
+          <button
+            onClick={downloadComplaintsCSV.bind(this, priorityComplaints)}
+            className="prioritydownload downloadbutton"
+          >
+            Download
           </button>
+        )}
+
+        {complaints.length > 0 && (
+          <h2 className="category-heading">{category}s</h2>
+        )}
+        {complaints.length > 0 && <ComplaintsList complaints={complaints} />}
+        {complaints.length > 0 && (
+          <button
+            onClick={downloadComplaintsCSV.bind(this, complaints)}
+            className="downloadbutton"
+          >
+            Download
+          </button>
+        )}
+
+        {complaints.length === 0 && priorityComplaints.length === 0 && (
+          <h2 className="no-complaints">No complaints found</h2>
         )}
       </div>
     </Layout>

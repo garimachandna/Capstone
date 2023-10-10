@@ -35,8 +35,9 @@
     /* text-align: center; */
     margin: 30px;
     /* padding: 30px; */
-    color: #c46464;
+    color: rgb(227, 141, 180);
     text-transform: capitalize;
+    
 }
 
 #priority-heading{
@@ -44,7 +45,7 @@
     margin: 30px ;
     /* text-align: center; */
     font-weight: bold;
-    color: crimson;
+    color: rgb(227, 141, 180);
     font-family: 'Montserrat', sans-serif;
     text-transform: capitalize;
 }
@@ -191,3 +192,79 @@ th{
     margin-bottom: 100px;
   
 }
+
+
+select{
+    width: auto;
+    height: 25px;
+    /* border-radius: 5px; */
+    height: 30px;
+    padding: 5px;
+    margin: 10px 0;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: #3f3b3b;
+    color: #c46464;
+    margin-left: 10px;
+    
+}
+
+select:hover{
+    background-color: whitesmoke;
+    color: #c46464;
+}
+
+
+#filter label{
+    font-size: 15px;
+    font-weight: bold;
+    color: #c46464;
+ 
+}
+
+#filter{
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+.scroll-to-top-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgb(102, 91, 91);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 80px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+  }
+  
+
+  .scroll-to-top-button.visible {
+    opacity: 1;
+  }
+  
+  .scroll-to-top-button:hover {
+    background-color: #afabab;
+    }
+
+
+    .scroll-to-top-button svg {
+     width: 24px;
+      height: 24px; 
+      margin: 4px; 
+      /* reduce thickness of arrow */
+        stroke-width: 1px;
+    }

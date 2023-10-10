@@ -5,13 +5,16 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Layout from "../components/layout/layout";
-// import delete icon from react-icons
-import { FaTrash } from "react-icons/fa";
+import ComplaintFilter from "../components/complaintfilter";
+import ComplaintsList from "../components/complaintlist";
+import ScrollToTopButton from "../components/scrolltotopbutton";
 
 const Viewcategory = () => {
   const location = useLocation();
   let [complaints, setComplaints] = useState([]);
   let [priorityComplaints, setPriorityComplaints] = useState([]);
+  const [sortOption, setSortOption] = useState("newest"); // Default sorting option
+
   let category = location.state.category;
   console.log(category);
   useEffect(() => {
@@ -115,49 +118,33 @@ const Viewcategory = () => {
     });
   };
 
-  const ComplaintsList = ({ complaints }) => {
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>S. No.</th>
-            <th>Complainant Name</th>
-            <th>Complaint Address</th>
-            <th>Complainant Phone</th>
-            <th>Complaint</th>
-            <th>Priority</th>
-            {/* <th>Delete</th> */}
-            {/* Add more table headers for other complaint details */}
-          </tr>
-        </thead>
-        <tbody>
-          {complaints.map((complaint, index) => (
-            <tr key={index + 1}>
-              <td>{index + 1}</td>
-              <td>{complaint.name}</td>
-              <td>{complaint.address}</td>
-              <td>{complaint.phone}</td>
-              <td>{complaint.complaint}</td>
-              <td>
-                <input
-                  type="checkbox"
-                  className="priority-checkbox"
-                  checked={complaint.priority}
-                  onChange={() => handlePriorityChange(category, complaint._id)}
-                />
-              </td>
-              <td className="no-border">
-                <FaTrash
-                  className="delete-icon"
-                  onClick={() => handleDelete(category, complaint._id)}
-                />
-              </td>
-              {/* Add more table cells for other complaint details */}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
+  const handleSortChange = (value, ispriority) => {
+    setSortOption(value);
+    console.log("sort option ", value);
+    // Sort the complaints list based on the selected option
+    if (ispriority) {
+      if (value === "newest") {
+        setPriorityComplaints(
+          [...priorityComplaints].sort((a, b) => b._id.localeCompare(a._id))
+        );
+      } else if (value === "oldest") {
+        setPriorityComplaints(
+          [...priorityComplaints].sort((a, b) => a._id.localeCompare(b._id))
+        );
+      }
+      console.log("priority complaints ", priorityComplaints);
+    } else {
+      if (value === "newest") {
+        setComplaints(
+          [...complaints].sort((a, b) => b._id.localeCompare(a._id))
+        );
+      } else if (value === "oldest") {
+        setComplaints(
+          [...complaints].sort((a, b) => a._id.localeCompare(b._id))
+        );
+      }
+      console.log("complaints ", complaints);
+    }
   };
 
   //download the complaints in csv format
@@ -203,8 +190,16 @@ const Viewcategory = () => {
           <h2 id="priority-heading">Priority {category}s</h2>
         )}
         {priorityComplaints.length > 0 && (
+          <ComplaintFilter onSortChange={handleSortChange} ispriority={true} />
+        )}
+        {priorityComplaints.length > 0 && (
           <div className="prioritycomplaints">
-            <ComplaintsList complaints={priorityComplaints} />
+            <ComplaintsList
+              category={category}
+              complaints={priorityComplaints}
+              handleDelete={handleDelete}
+              handlePriorityChange={handlePriorityChange}
+            />
           </div>
         )}
         {priorityComplaints.length > 0 && (
@@ -219,7 +214,17 @@ const Viewcategory = () => {
         {complaints.length > 0 && (
           <h2 className="category-heading">{category}s</h2>
         )}
-        {complaints.length > 0 && <ComplaintsList complaints={complaints} />}
+        {complaints.length > 0 && (
+          <ComplaintFilter onSortChange={handleSortChange} ispriority={false} />
+        )}
+        {complaints.length > 0 && (
+          <ComplaintsList
+            category={category}
+            complaints={complaints}
+            handleDelete={handleDelete}
+            handlePriorityChange={handlePriorityChange}
+          />
+        )}
         {complaints.length > 0 && (
           <button
             onClick={downloadComplaintsCSV.bind(this, complaints)}
@@ -233,6 +238,7 @@ const Viewcategory = () => {
           <h2 className="no-complaints">No complaints found</h2>
         )}
       </div>
+      <ScrollToTopButton />
     </Layout>
   );
 };

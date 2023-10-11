@@ -8,6 +8,7 @@ const kidnapModel = require("../models/kidnap.js");
 const murderModel = require("../models/murder.js");
 const rapeModel = require("../models/rape.js");
 const theftModel = require("../models/theft.js");
+const { count } = require("console");
 
 const registerController = async (req, res) => {
   try {
@@ -420,9 +421,53 @@ const deleteController = async (req, res) => {
     });
   } catch (e) {
     console.log("Deleted Unsuccessful");
-    res.status(200).send({
+    res.status(400).send({
       success: false,
       message: "Complaint not deleted",
+    });
+  }
+};
+
+const countController = async (req, res) => {
+  let counts = [0, 0, 0, 0, 0];
+  const models = {
+    accident: accidentModel,
+    murder: murderModel,
+    kidnap: kidnapModel,
+    rape: rapeModel,
+    theft: theftModel,
+  };
+
+  try {
+    let model = models["accident"];
+    let cidcomplaints = model.Complaint;
+    counts[0] = await cidcomplaints.count();
+
+    model = models["kidnap"];
+    cidcomplaints = model.Complaint;
+    counts[1] = await cidcomplaints.count();
+
+    model = models["murder"];
+    cidcomplaints = model.Complaint;
+    counts[2] = await cidcomplaints.count();
+
+    model = models["rape"];
+    cidcomplaints = model.Complaint;
+    counts[3] = await cidcomplaints.count();
+
+    model = models["theft"];
+    cidcomplaints = model.Complaint;
+    counts[4] = await cidcomplaints.count();
+    res.status(200).send({
+      success: true,
+      message: "Complaint count fetched",
+      count: counts,
+    });
+  } catch (e) {
+    console.log("couldnot fetch complaints count");
+    res.status(400).send({
+      success: false,
+      message: "Complaint count not fetched",
     });
   }
 };
@@ -437,4 +482,5 @@ module.exports = {
   viewController,
   priorityController,
   deleteController,
+  countController,
 };

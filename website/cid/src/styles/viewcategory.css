@@ -268,3 +268,27 @@ select:hover{
       /* reduce thickness of arrow */
         stroke-width: 1px;
     }
+
+
+@media (max-width: 690px) {
+    #filter label, #filter select, table{
+        font-size: 12px !important;
+    }
+}
+
+@media (max-width: 570px) {
+    #filter label,#filter select, table{
+        font-size: 10px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #filter label,#filter select, table{
+        font-size: 8px !important;
+    }
+}
+@media (max-width: 480px) {
+    #phone{
+        display: none;
+    }
+}

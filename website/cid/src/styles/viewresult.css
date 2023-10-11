@@ -1,5 +1,6 @@
 #title{
     margin-bottom: 40px;
+    margin-top: 20px;
 }
 
 .viewresult::before{
@@ -32,7 +33,7 @@
 .cards{
     width: auto;
     height: auto;
-    margin: 10px;
+    margin: 15px;
     /* border: 1px solid black; */
     border-radius: 10px;
     overflow: hidden;
@@ -84,3 +85,60 @@
     flex-direction: row;
     
 }
+
+@media (max-width: 1000px) {
+    /* .pie-chart {
+      max-width: 200px; /* Adjust the maximum width for smaller screens } */
+    .card-container{
+        grid-template-columns: repeat(2, 1fr);
+    }   
+
+    .card-title{
+        font-size: medium;
+    }
+  }
+
+  @media (max-width: 830px) {
+    .pieandcard{
+        flex-direction: column;
+        align-items: center;
+    }
+    
+  }
+
+  @media (max-width: 550px) {
+    .card-container{
+        grid-template-columns: 1fr;
+    }    
+
+    .cards{
+        margin: 30px 50px;
+    }
+
+    #title{
+        font-size: 45px;
+    }
+  }
+
+  @media (max-width: 440px) {
+    .pie canvas{
+        height: 400px !important;
+        width: 400px !important;
+    } 
+
+    #title{
+        font-size: 35px;
+    }
+  }
+
+
+  @media (max-width: 350px) {
+    .pie canvas{
+        height: 300px !important;
+        width: 300px !important;
+    } 
+
+    #title{
+        font-size: 30px;
+    }
+  }

@@ -67,7 +67,7 @@ body {
     flex-direction: column;
     /* justify-content: center; */
     align-items: flex-start;
-    width: -webkit-fill-available;
+    width: max-content;
   }
 
 
@@ -164,7 +164,6 @@ textarea{
 
 #file .myform-container{
     justify-content: flex-start;
-    padding-left: 50px;
     padding-top: 15px;
     width: -webkit-fill-available;
 }
@@ -179,4 +178,41 @@ textarea{
 
 #file .box input{
     margin-left: 5px;
+}
+
+@media (max-width: 678px) {
+  #headings h1, #headings p{
+    font-size: 20px !important;
+  }
+  input, textarea{
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 531px) {
+  #headings h1, #headings p{
+    font-size: 17px !important;
+  }
+  input, textarea{
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 451px) {
+  #headings h1, #headings p{
+    font-size: 15px !important;
+  }
+  input, textarea{
+    font-size: 8px;
+  }
+
+  button{
+    font-size: 8px !important;
+  }
+}
+
+@media (max-width: 372px) {
+  #headings h1, #headings p{
+    font-size: 10px !important;
+  }
 }

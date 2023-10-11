@@ -14,7 +14,7 @@ const ComplaintsList = ({
           <th>S. No.</th>
           <th>Complainant Name</th>
           <th>Complaint Address</th>
-          <th>Complainant Phone</th>
+          <th id="phone">Complainant Phone</th>
           <th>Complaint</th>
           <th>Priority</th>
           {/* <th>Delete</th> */}
@@ -27,7 +27,7 @@ const ComplaintsList = ({
             <td>{index + 1}</td>
             <td>{complaint.name}</td>
             <td>{complaint.address}</td>
-            <td>{complaint.phone}</td>
+            <td id="phone">{complaint.phone}</td>
             <td>{complaint.complaint}</td>
             <td>
               <input

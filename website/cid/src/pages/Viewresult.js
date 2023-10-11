@@ -23,12 +23,12 @@ const imageData = [
     alt: "murder",
   },
   {
-    label: "Rape/Molestation",
+    label: "Rape",
     url: "/images/carousel/rape.jpg",
     alt: "rape",
   },
   {
-    label: "Robbery",
+    label: "Thefts",
     url: "images/carousel/robbery2.jpg",
     alt: "theft",
   },

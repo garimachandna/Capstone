@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../context/auth";
+import { AiOutlineMenu } from "react-icons/ai";
+import { useState } from "react";
 
 function Header() {
   const [auth, setAuth] = useAuth();
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
   const handleLogout = () => {
     setAuth({
       ...auth,
@@ -13,31 +20,23 @@ function Header() {
     localStorage.removeItem("auth");
   };
 
-  console.log(auth);
-  console.log(auth.user);
+  // console.log(auth);
+  // console.log(auth.user);
   if (auth.user) console.log(auth.user.role);
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <Link to="/" className="navbar-brand">
+              StreamlineCID
+            </Link>
+          </div>
+          <ul
+            className={`navbar-nav ms-auto mb-2 mb-lg-0 ${
+              isMenuOpen ? "active" : ""
+            }`}
           >
-            <span className="navbar-toggler-icon" />
-          </button>
-
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-              <Link to="/" className="navbar-brand">
-                StreamlineCID
-              </Link>
-            </div>
             <li className="nav-item">
               <NavLink to="/" className="nav-link ">
                 Home
@@ -101,6 +100,19 @@ function Header() {
               </>
             )}
           </ul>
+          <button
+            className="navbar-toggler"
+            id="menu-icon"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            onClick={toggleMenu}
+          >
+            <AiOutlineMenu></AiOutlineMenu>
+          </button>
         </div>
       </nav>
     </div>

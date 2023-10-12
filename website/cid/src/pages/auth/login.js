@@ -31,6 +31,7 @@ const Login = () => {
             role: res.data.user.role,
           });
           localStorage.setItem("auth", JSON.stringify(res.data));
+          // console.log("auth", auth);
           navigate(location.state || "/");
         } else {
           toast.error(res.data.message);

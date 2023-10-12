@@ -8,6 +8,8 @@ import Layout from "../components/layout/layout";
 import ComplaintFilter from "../components/complaintfilter";
 import ComplaintsList from "../components/complaintlist";
 import ScrollToTopButton from "../components/scrolltotopbutton";
+import { useAuth } from "../context/auth";
+import { useNavigate } from "react-router-dom";
 
 const Viewcategory = () => {
   const location = useLocation();
@@ -15,18 +17,26 @@ const Viewcategory = () => {
   let [priorityComplaints, setPriorityComplaints] = useState([]);
   const [sortOption, setSortOption] = useState("newest"); // Default sorting option
 
-  let category = location.state.category;
+  const user = useAuth()[0].user;
+  const navigate = useNavigate();
+
+  // console.log("location ", location);
+
+  let category = location.state?.category;
   console.log(category);
   useEffect(() => {
     let ignore = false;
-
+    console.log("category ", category);
     if (!ignore) {
-      getComplaints(category);
+      if (category == null || !user || user.role === 0) {
+        console.log("redirecting to login");
+        navigate("/login");
+      } else getComplaints(category);
     }
     return () => {
       ignore = true;
     };
-  }, [category]);
+  }, [category, user, navigate]);
 
   const getComplaints = (category) => {
     console.log("finding for category ", category);

@@ -1,10 +1,11 @@
 import Layout from "../components/layout/layout";
 import "../styles/viewresult.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PieChart from "../components/piechart";
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useAuth } from "../context/auth";
 
 const imageData = [
   {
@@ -48,10 +49,16 @@ const card = imageData.map((image) => (
 
 const Viewresult = () => {
   const [count, setCount] = useState([]);
+  const user = useAuth()[0].user;
+  const navigate = useNavigate();
 
+  // console.log("user", auth);
   useEffect(() => {
     let ignore = false;
     if (!ignore) {
+      if (!user || user.role === 0) {
+        navigate("/login");
+      }
       fetchData();
 
       const interval = setInterval(fetchData, 20000); // Poll every 20 seconds
@@ -61,7 +68,7 @@ const Viewresult = () => {
     return () => {
       ignore = true;
     };
-  }, []);
+  }, [user, navigate]);
 
   const fetchData = async () => {
     const response = await axios.post("http://localhost:8080/api/getcount");
@@ -71,12 +78,14 @@ const Viewresult = () => {
     // console.log("count of complaints received ", count, response.data.count);
   };
 
+  let colors = ["#FFDDD5", "#D483B5", "#ED93AC", "#F7AEB7", "#A878AC"];
+
   let data = [
-    { label: "Accident", value: count[0], color: "#FF5733" },
-    { label: "Kidnap", value: count[1], color: "#4287f5" },
-    { label: "Murder", value: count[2], color: "#6BD425" },
-    { label: "Rape", value: count[3], color: "#FFA933" },
-    { label: "Theft", value: count[4], color: "#A13BEC" },
+    { label: "Accident", value: count[0], color: colors[0] },
+    { label: "Kidnap", value: count[1], color: colors[1] },
+    { label: "Murder", value: count[2], color: colors[2] },
+    { label: "Rape", value: count[3], color: colors[3] },
+    { label: "Theft", value: count[4], color: colors[4] },
   ];
 
   const links = [
@@ -89,6 +98,9 @@ const Viewresult = () => {
 
   console.log("data", data);
   return (
+    // the user should access this page only if logged in
+    // check if user is logged in else redirect to login page
+
     <Layout>
       <div className="viewresult">
         <h1 id="title">View Complaints</h1>

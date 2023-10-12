@@ -2,8 +2,10 @@ import axios from "axios";
 import "../styles/filecomplaint.css";
 import Layout from "../components/layout/layout";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AiTwotoneMail, AiFillLock } from "react-icons/ai";
+import { useAuth } from "../context/auth";
+import { useNavigate } from "react-router-dom";
 
 const Filecomplaint = () => {
   const [complaintData, setComplaintData] = useState({
@@ -12,6 +14,16 @@ const Filecomplaint = () => {
     phone: "",
     complaintText: "",
   });
+
+  const user = useAuth()[0].user;
+  // console.log("user filing complaint ", user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user || user.role !== 0) {
+      navigate("/login");
+    }
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

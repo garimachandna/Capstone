@@ -43,7 +43,7 @@ router.post(
 );
 
 //view route
-router.post("/viewcategory", viewController);
+router.post("/viewcategory", requireSignIn, viewController);
 
 //update priority route
 router.post("/updatepriority", requireSignIn, priorityController);

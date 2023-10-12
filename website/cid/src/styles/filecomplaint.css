@@ -216,3 +216,14 @@ textarea{
     font-size: 10px !important;
   }
 }
+
+
+@media (max-width: 300px) {
+  input, textarea{
+    font-size: 4px;
+  }
+
+  button{
+    font-size: 6px !important;
+  }
+}

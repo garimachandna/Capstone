@@ -132,7 +132,7 @@
   }
 
 
-  @media (max-width: 350px) {
+  @media (max-width: 370px) {
     .pie canvas{
         height: 300px !important;
         width: 300px !important;
@@ -141,4 +141,12 @@
     #title{
         font-size: 30px;
     }
+  }
+
+  @media (min-height: 1000px) {
+    .pieandcard{
+        flex-direction: column;
+        align-items: center;
+    }
+    
   }

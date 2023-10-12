@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../../context/auth";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import axios from "axios";
-import Spinner from "./spinner";
+import { Route, useNavigate } from "react-router-dom";
+// import Spinner from "./spinner";
 
 export default function PrivateRoute({ children }) {
   const [ok, setOk] = useState(false);
@@ -21,5 +22,7 @@ export default function PrivateRoute({ children }) {
       authCheck();
     }
   }, [auth?.token]);
-  return ok ? <Outlet /> : <Spinner />;
+
+  console.log("ok", ok);
+  return <Route render={(props) => (ok ? <Outlet /> : Navigate("/login"))} />;
 }

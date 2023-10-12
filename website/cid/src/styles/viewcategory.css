@@ -292,3 +292,13 @@ select:hover{
         display: none;
     }
 }
+
+@media (max-width: 300px) {
+    #filter label,#filter select, table{
+        font-size: 5px !important;
+    }
+    table{
+        margin: 5px;
+        width: min-content;
+    }
+}

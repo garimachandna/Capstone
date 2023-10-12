@@ -24,7 +24,6 @@
     justify-content: center;
     height: inherit;
     flex-direction: row;
-    
 }
 
 
@@ -39,7 +38,7 @@
 
 .form-container h1{
     width: auto;
-    font-size: 40px;
+    font-size: 60px;
     /* display: inline-block; */
     border-bottom: 5px solid rgb(116, 20, 63);
     margin-bottom: 33px;
@@ -73,14 +72,18 @@
     padding: 8px;
 }
 
-input{
+.form-control{
     background: none;
     border: none;
     outline: none;
     color: white;
-    font-size: 12px;
+    font-size: larger;
     /* padding: 5px 10px; */
     font-weight: bold;
+}
+
+.form-control:focus{
+    border-bottom: 2px solid rgb(116, 20, 63);
 }
 
 .forminfo .buttons{
@@ -118,4 +121,40 @@ input{
     width: 50px !important;
     color: white;
     vertical-align: middle;
+}
+
+
+@media (max-width: 1000px) {
+    .form-container
+    {
+        flex-direction: column;
+    }
+}
+
+
+@media (max-width: 645px) {
+    .form-container h1{
+        font-size: 40px;
+    }
+    .form-container p{
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .form-container h1{
+        font-size: 30px;
+    }
+    
+    .form-container p{
+        font-size: 15px;
+    }
+
+    .form-control{
+        font-size: 15px;
+    }
+
+    .buttons{
+        width: -webkit-fill-available !important;
+    }
 }

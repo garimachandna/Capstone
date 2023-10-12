@@ -48,6 +48,7 @@
 
 .carouselcard{
   height: fit-content;
+  /* margin-top: 80px; */
   width: -webkit-fill-available;
 }
 
@@ -123,12 +124,40 @@
   font-family: 'Caprasimo', cursive;
   color: #b39946;
   font-size: 60px;
-  padding-bottom: 10px;
 }
 
+
+.home #title{
+  margin-bottom: 0;
+}
 
 .legend{
   font-family: 'Poppins' !important;
   font-weight: bold;
   font-size: large !important;
+}
+
+
+@media (max-width: 678px) {
+  .info p{
+    font-size: medium !important;
+  }  
+  .info h2{
+    font-size: large !important;
+  }
+}
+
+@media (max-width: 460px) {
+  .carousel .thumbs-wrapper{
+    display: none;
+  }
+}
+
+@media (max-width: 330px) {
+  .info p{
+    font-size: small !important;
+  }  
+  .info h2{
+    font-size: medium !important;
+  }
 }

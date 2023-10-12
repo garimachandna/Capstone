@@ -2,10 +2,11 @@
     font-size: 1.2rem;
     line-height: 1.5;
     color: #777;
-    margin: 0 0 1.5rem 0;
+    margin: 10px 10px 1.5rem 0;
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     text-align: justify;
+    margin-right: 20px;
 }
 
 .aboutimg{
@@ -16,4 +17,54 @@
 
 .col-md-6{
     height: inherit;
+}
+
+.contactus{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+@media (max-width: 1300px) {
+    .aboutimg {
+        width: 500px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .aboutimg {
+        width: fit-content;
+    }
+
+    .contactus{
+        grid-template-columns: 1fr;
+        place-items: center;
+    }
+
+    .aboutp{
+        margin-left: 20px;
+    }
+}
+    
+@media (max-width: 760px) {
+    .aboutimg {
+        width: 400px;
+        /* height: 400px; */
+    }
+}
+
+@media (max-width : 460px) {
+    .aboutimg {
+        width: 300px;
+    }
+
+    .aboutp{
+        font-size: 1rem;
+    }
+}
+
+@media (max-width : 330px) {
+    .aboutimg {
+        width: 200px;
+    }
+
 }

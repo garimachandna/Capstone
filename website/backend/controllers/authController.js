@@ -116,7 +116,10 @@ const loginController = async (req, res) => {
 
 const forgotPasswordController = async (req, res) => {
   try {
-    const { email, newPassword } = req.body;
+    const { email, newpassword } = req.body;
+    // console.log("req.body: ", req.body);
+    // console.log("email: ", email);
+    // console.log("newPassword: ", newPassword);
     //validations
     if (!email) {
       return res.status(400).send({
@@ -124,7 +127,7 @@ const forgotPasswordController = async (req, res) => {
         success: false,
       });
     }
-    if (!newPassword) {
+    if (!newpassword) {
       return res.status(400).send({
         message: "Please enter new password",
         success: false,
@@ -143,7 +146,7 @@ const forgotPasswordController = async (req, res) => {
       });
     }
 
-    const hashed = await hashPassword(newPassword);
+    const hashed = await hashPassword(newpassword);
     await users.findByIdAndUpdate(user._id, { password: hashed });
     res.status(200).send({
       message: "Password updated successfully",

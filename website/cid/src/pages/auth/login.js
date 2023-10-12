@@ -78,7 +78,7 @@ const Login = () => {
             </div>
 
             <div className="buttons mb-3">
-              {/* <button
+              <button
                 type="button"
                 className="btn btn-primary"
                 onClick={() => {
@@ -86,7 +86,7 @@ const Login = () => {
                 }}
               >
                 Forgot Password
-              </button> */}
+              </button>
               <button
                 type="submit"
                 className="btn btn-primary"

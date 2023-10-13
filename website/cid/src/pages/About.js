@@ -4,7 +4,7 @@ import "../styles/about.css";
 const About = () => {
   return (
     <Layout title={"About us - Ecommerce app"}>
-      <div className="row contactus ">
+      <div className="row aboutus ">
         <div className="col-md-6 ">
           <img
             className="aboutimg"
@@ -17,6 +17,7 @@ const About = () => {
           />
         </div>
         <div className="col-md-4">
+          <h1 className="about-head">About Us</h1>
           <p className="aboutp text-justify mt-2">
             StreamlineCID is dedicated to revolutionizing the complaint
             classification process within the Criminal Investigation Department

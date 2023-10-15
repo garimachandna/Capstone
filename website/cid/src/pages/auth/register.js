@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import "../../styles/login.css";
 import { useAuth } from "../../context/auth";
 import { AiTwotoneMail, AiFillLock } from "react-icons/ai";
+import { IoPerson } from "react-icons/io5";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -64,7 +65,7 @@ const Register = () => {
         <form className="container" onSubmit={handleSubmit}>
           <div className="forminfo">
             <div className="box mb-3">
-              <AiTwotoneMail />
+              <IoPerson />
               <input
                 type="text"
                 value={name}

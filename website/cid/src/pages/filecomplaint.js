@@ -3,9 +3,12 @@ import "../styles/filecomplaint.css";
 import Layout from "../components/layout/layout";
 import React from "react";
 import { useState, useEffect } from "react";
-import { AiTwotoneMail, AiFillLock } from "react-icons/ai";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
+//import phone icon, address icon, complaint icon
+import { IoPerson } from "react-icons/io5";
+import { AiFillPhone, AiFillEdit } from "react-icons/ai";
+import { FaAddressCard } from "react-icons/fa";
 
 const Filecomplaint = () => {
   const [complaintData, setComplaintData] = useState({
@@ -65,7 +68,7 @@ const Filecomplaint = () => {
             <form className="container" onSubmit={handleSubmit}>
               <div className="forminfo">
                 <div className="box mb-3">
-                  <AiTwotoneMail />
+                  <IoPerson />
                   <input
                     type="text"
                     name="name"
@@ -78,7 +81,7 @@ const Filecomplaint = () => {
                   />
                 </div>
                 <div className="box mb-3">
-                  <AiFillLock />
+                  <AiFillPhone />
                   <input
                     type="tel"
                     name="phone"
@@ -92,7 +95,7 @@ const Filecomplaint = () => {
                   />
                 </div>
                 <div className="box mb-3">
-                  <AiFillLock />
+                  <FaAddressCard />
                   <input
                     type="text"
                     name="address"
@@ -105,7 +108,7 @@ const Filecomplaint = () => {
                   />
                 </div>
                 <div className="box mb-3">
-                  <AiFillLock />
+                  <AiFillEdit />
                   <textarea
                     type="text"
                     name="complaintText"

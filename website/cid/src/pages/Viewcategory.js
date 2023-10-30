@@ -10,12 +10,64 @@ import ComplaintsList from "../components/complaintlist";
 import ScrollToTopButton from "../components/scrolltotopbutton";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Viewcategory = () => {
   const location = useLocation();
   let [complaints, setComplaints] = useState([]);
   let [priorityComplaints, setPriorityComplaints] = useState([]);
   const [sortOption, setSortOption] = useState("newest"); // Default sorting option
+  const [keyword, setKeyword] = useState("");
+  const [priorityKeyword, setPriorityKeyword] = useState("");
+
+  const clearFilter = (ispriority) => {
+    if (ispriority) setPriorityKeyword("");
+    else setKeyword("");
+    getComplaints(category, true, ispriority);
+  };
+
+  const handleSearch = async (ispriority) => {
+    const key = ispriority ? priorityKeyword : keyword;
+    console.log(
+      "searching for ",
+      key,
+      " in category ",
+      category,
+      ispriority,
+      sortOption
+    );
+    try {
+      let response = await Axios.post(
+        "http://localhost:8080/api/findcomplaints", //findcomplaints
+        {
+          keyword: key,
+          category,
+          ispriority,
+          sortOption,
+        }
+      );
+
+      console.log("response ", response);
+      if (response.data.success === false) {
+        console.error(response.data.message);
+      }
+
+      if (response.data.complaints.length === 0) {
+        // console.log("no complaints found");
+        toast.error("No complaints found");
+        if (ispriority) setPriorityKeyword("");
+        else setKeyword("");
+      } else {
+        if (ispriority) {
+          setPriorityComplaints(response.data.complaints);
+        } else setComplaints(response.data.complaints);
+      }
+
+      console.log(response.data.complaints);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const user = useAuth()[0].user;
   const navigate = useNavigate();
@@ -24,29 +76,49 @@ const Viewcategory = () => {
 
   let category = location.state?.category;
   console.log(category);
+
   useEffect(() => {
     let ignore = false;
-    console.log("category ", category);
     if (!ignore) {
       if (category == null || !user || user.role === 0) {
         console.log("redirecting to login");
         navigate("/login");
-      } else getComplaints(category);
+      } else {
+        console.log("getting complaints");
+        getComplaints(category); //if (keyword == null)
+      }
     }
     return () => {
       ignore = true;
     };
   }, [category, user, navigate]);
 
-  const getComplaints = (category) => {
+  const getComplaints = (category, isnull = false, ispriority = false) => {
     console.log("finding for category ", category);
     try {
       Axios.post("http://localhost:8080/api/viewcategory", { category }).then(
         (res) => {
           if (res && res.data.success) {
             console.log("res ", res.data);
-            setComplaints(res.data.complaints);
-            setPriorityComplaints(res.data.prioritycomplaints);
+
+            console.log(keyword, priorityKeyword);
+
+            if (isnull === false) {
+              setComplaints(res.data.complaints);
+              setPriorityComplaints(res.data.prioritycomplaints);
+            }
+
+            if (isnull && !ispriority) {
+              console.log("setting complaints");
+              setComplaints(res.data.complaints);
+              console.log("complaints ", complaints);
+            }
+
+            if (isnull && ispriority) {
+              setPriorityComplaints(res.data.prioritycomplaints);
+              console.log("priority complaints ", priorityComplaints);
+            }
+
             // console.log("complaints ", complaints);
             // console.log("priority complaints ", priorityComplaints);
           } else {
@@ -197,51 +269,92 @@ const Viewcategory = () => {
     <Layout>
       <div className="viewcategory">
         {priorityComplaints.length > 0 && (
-          <h2 id="priority-heading">Priority {category}s</h2>
-        )}
-        {priorityComplaints.length > 0 && (
-          <ComplaintFilter onSortChange={handleSortChange} ispriority={true} />
-        )}
-        {priorityComplaints.length > 0 && (
-          <div className="prioritycomplaints">
-            <ComplaintsList
-              category={category}
-              complaints={priorityComplaints}
-              handleDelete={handleDelete}
-              handlePriorityChange={handlePriorityChange}
-            />
+          <div className="priorityblock block">
+            <h2 id="priority-heading">Priority {category}s</h2>
+
+            <div className="filters">
+              <ComplaintFilter
+                onSortChange={handleSortChange}
+                ispriority={true}
+              />
+
+              <div className="prioritysearch search">
+                <input
+                  type="text"
+                  className="prioritysearchbar searchbar"
+                  placeholder="Search for complaints"
+                  value={priorityKeyword}
+                  onChange={(e) => setPriorityKeyword(e.target.value)}
+                />
+                <button
+                  className="searchbutton"
+                  onClick={handleSearch.bind(this, true)}
+                >
+                  Search
+                </button>
+                <button onClick={clearFilter.bind(this, true)}>
+                  Clear Filter
+                </button>
+              </div>
+            </div>
+
+            <div className="prioritycomplaints">
+              <ComplaintsList
+                category={category}
+                complaints={priorityComplaints}
+                handleDelete={handleDelete}
+                handlePriorityChange={handlePriorityChange}
+              />
+            </div>
+            <button
+              onClick={downloadComplaintsCSV.bind(this, priorityComplaints)}
+              className="prioritydownload downloadbutton"
+            >
+              Download
+            </button>
           </div>
-        )}
-        {priorityComplaints.length > 0 && (
-          <button
-            onClick={downloadComplaintsCSV.bind(this, priorityComplaints)}
-            className="prioritydownload downloadbutton"
-          >
-            Download
-          </button>
         )}
 
         {complaints.length > 0 && (
-          <h2 className="category-heading">{category}s</h2>
-        )}
-        {complaints.length > 0 && (
-          <ComplaintFilter onSortChange={handleSortChange} ispriority={false} />
-        )}
-        {complaints.length > 0 && (
-          <ComplaintsList
-            category={category}
-            complaints={complaints}
-            handleDelete={handleDelete}
-            handlePriorityChange={handlePriorityChange}
-          />
-        )}
-        {complaints.length > 0 && (
-          <button
-            onClick={downloadComplaintsCSV.bind(this, complaints)}
-            className="downloadbutton"
-          >
-            Download
-          </button>
+          <div className="block genblock">
+            <h2 className="category-heading">{category}s</h2>
+            <div className="filters">
+              <ComplaintFilter
+                onSortChange={handleSortChange}
+                ispriority={false}
+              />
+              <div className="gensearch search">
+                <input
+                  type="text"
+                  className="gensearchbar searchbar"
+                  placeholder="Search for complaints"
+                  value={keyword}
+                  onChange={(e) => setKeyword(e.target.value)}
+                />
+                <button
+                  className="searchbutton"
+                  onClick={handleSearch.bind(this, false)}
+                >
+                  Search
+                </button>
+                <button onClick={clearFilter.bind(this, false)}>
+                  Clear Filter
+                </button>
+              </div>
+            </div>
+            <ComplaintsList
+              category={category}
+              complaints={complaints}
+              handleDelete={handleDelete}
+              handlePriorityChange={handlePriorityChange}
+            />
+            <button
+              onClick={downloadComplaintsCSV.bind(this, complaints)}
+              className="downloadbutton"
+            >
+              Download
+            </button>
+          </div>
         )}
 
         {complaints.length === 0 && priorityComplaints.length === 0 && (

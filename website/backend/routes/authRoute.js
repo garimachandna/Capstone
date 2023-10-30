@@ -10,6 +10,7 @@ const {
   priorityController,
   deleteController,
   countController,
+  searchController,
 } = require("../controllers/authController.js");
 const fileUpload = require("express-fileupload");
 
@@ -53,6 +54,9 @@ router.post("/deletecomplaint", requireSignIn, deleteController);
 
 //get complaint counts controller
 router.post("/getcount", countController);
+
+//get complaints based on keyword
+router.post("/findcomplaints", requireSignIn, searchController);
 
 //protected route
 router.get("/user-auth", requireSignIn, (req, res) => {

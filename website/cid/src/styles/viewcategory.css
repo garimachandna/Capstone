@@ -179,6 +179,9 @@ td{
     border-style : hidden!important;
 }
 
+.block{
+    display: contents;
+}
 
 .prioritycomplaints{
     color: burlywood;
@@ -191,6 +194,10 @@ th{
 .prioritydownload{
     margin-bottom: 100px;
   
+}
+
+.downloadbutton{
+    align-self: center;
 }
 
 
@@ -225,8 +232,6 @@ select:hover{
 }
 
 #filter{
-    margin: 0 auto;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -269,6 +274,37 @@ select:hover{
         stroke-width: 1px;
     }
 
+
+.filters{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.searchbar{
+    padding: 8px;
+    padding-left: auto;
+}
+.searchbutton{
+    padding: 8px;
+   width: min-content;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: 15px;
+}
 
 @media (max-width: 690px) {
     #filter label, #filter select, table{

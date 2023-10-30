@@ -475,6 +475,69 @@ const countController = async (req, res) => {
   }
 };
 
+const searchController = async (req, res) => {
+  const { keyword, category, ispriority, sortOption } = req.body;
+  console.log("printing here ", category, keyword, ispriority, sortOption);
+  const models = {
+    accident: accidentModel,
+    murder: murderModel,
+    kidnap: kidnapModel,
+    rape: rapeModel,
+    theft: theftModel,
+  };
+
+  const model = models[category];
+  const cidcomplaints = model.Complaint;
+  try {
+    let complaints = [];
+    if (sortOption === "newest") {
+      complaints = await cidcomplaints
+        .find({
+          $or: [
+            { complaint: { $regex: keyword, $options: "i" } },
+            { name: { $regex: keyword, $options: "i" } },
+            { address: { $regex: keyword, $options: "i" } },
+          ],
+
+          priority: ispriority,
+        })
+        .sort({ _id: -1 });
+    } else {
+      complaints = await cidcomplaints
+        .find({
+          $or: [
+            { complaint: { $regex: keyword, $options: "i" } },
+            { name: { $regex: keyword, $options: "i" } },
+            { address: { $regex: keyword, $options: "i" } },
+          ],
+
+          priority: ispriority,
+        })
+        .sort({ _id: 1 });
+    }
+    //if sortOption= newest , sort in descending order of id else ascending
+    console.log(complaints);
+    // if (sortOption === "newest") {
+    //   console.log("sorting ");
+    //   complaints = complaints.sort({ _id: -1 });
+    // }
+
+    console.log("Found Complaints Successfully");
+    res.status(200).send({
+      success: true,
+      message: "Complaint retrieved from database",
+      complaints: complaints,
+    });
+  } catch (err) {
+    console.log("Search Unsuccessful");
+    res.status(400).send({
+      success: false,
+      message: "Complaint could not be found",
+      error: err,
+    });
+  }
+};
+
 module.exports = {
   registerController,
   loginController,
@@ -486,4 +549,5 @@ module.exports = {
   priorityController,
   deleteController,
   countController,
+  searchController,
 };

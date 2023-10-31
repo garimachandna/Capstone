@@ -476,8 +476,17 @@ const countController = async (req, res) => {
 };
 
 const searchController = async (req, res) => {
-  const { keyword, category, ispriority, sortOption } = req.body;
-  console.log("printing here ", category, keyword, ispriority, sortOption);
+  const { keyword, category, ispriority, sortOption, filterType, filter } =
+    req.body;
+  console.log(
+    "printing here ",
+    category,
+    keyword,
+    ispriority,
+    sortOption,
+    filterType,
+    filter
+  );
   const models = {
     accident: accidentModel,
     murder: murderModel,
@@ -491,36 +500,60 @@ const searchController = async (req, res) => {
   try {
     let complaints = [];
     if (sortOption === "newest") {
-      complaints = await cidcomplaints
-        .find({
-          $or: [
-            { complaint: { $regex: keyword, $options: "i" } },
-            { name: { $regex: keyword, $options: "i" } },
-            { address: { $regex: keyword, $options: "i" } },
-          ],
+      if (filterType === "name") {
+        complaints = await cidcomplaints
+          .find({
+            $and: [
+              { complaint: { $regex: keyword, $options: "i" } },
+              { name: { $regex: filter, $options: "i" } },
+              // { address: { $regex: filter, $options: "i" } },
+            ],
 
-          priority: ispriority,
-        })
-        .sort({ _id: -1 });
+            priority: ispriority,
+          })
+          .sort({ _id: -1 });
+      } else {
+        complaints = await cidcomplaints
+          .find({
+            $and: [
+              { complaint: { $regex: keyword, $options: "i" } },
+              // { name: { $regex: filter, $options: "i" } },
+              { address: { $regex: filter, $options: "i" } },
+            ],
+
+            priority: ispriority,
+          })
+          .sort({ _id: -1 });
+      }
     } else {
-      complaints = await cidcomplaints
-        .find({
-          $or: [
-            { complaint: { $regex: keyword, $options: "i" } },
-            { name: { $regex: keyword, $options: "i" } },
-            { address: { $regex: keyword, $options: "i" } },
-          ],
+      if (filterType === "name") {
+        complaints = await cidcomplaints
+          .find({
+            $and: [
+              { complaint: { $regex: keyword, $options: "i" } },
+              { name: { $regex: filter, $options: "i" } },
+              // { address: { $regex: keyword, $options: "i" } },
+            ],
 
-          priority: ispriority,
-        })
-        .sort({ _id: 1 });
+            priority: ispriority,
+          })
+          .sort({ _id: 1 });
+      } else {
+        complaints = await cidcomplaints
+          .find({
+            $and: [
+              { complaint: { $regex: keyword, $options: "i" } },
+              // { name: { $regex: filter, $options: "i" } },
+              { address: { $regex: filter, $options: "i" } },
+            ],
+
+            priority: ispriority,
+          })
+          .sort({ _id: 1 });
+      }
     }
     //if sortOption= newest , sort in descending order of id else ascending
     console.log(complaints);
-    // if (sortOption === "newest") {
-    //   console.log("sorting ");
-    //   complaints = complaints.sort({ _id: -1 });
-    // }
 
     console.log("Found Complaints Successfully");
     res.status(200).send({

@@ -6,6 +6,7 @@ const ScrollToTopButton = () => {
 
   // Show the button when the user scrolls down 300px from the top of the page
   useEffect(() => {
+    // console.log(window.scrollY);
     const handleScroll = () => {
       if (window.scrollY > 300) {
         setIsVisible(true);

@@ -19,22 +19,42 @@ const Viewcategory = () => {
   const [sortOption, setSortOption] = useState("newest"); // Default sorting option
   const [keyword, setKeyword] = useState("");
   const [priorityKeyword, setPriorityKeyword] = useState("");
+  const [filterType, setFilterType] = useState("name");
+  const [filter, setFilter] = useState("");
+  const [priorityFilterType, setPriorityFilterType] = useState("name");
+  const [priorityFilter, setPriorityFilter] = useState("");
+
+  const handleFilterChange = (e, ispriority) => {
+    console.log(e);
+    // console.log(e.target);
+    if (ispriority) setPriorityFilterType(e.target.value);
+    else setFilterType(e.target.value);
+  };
 
   const clearFilter = (ispriority) => {
-    if (ispriority) setPriorityKeyword("");
-    else setKeyword("");
+    if (ispriority) {
+      setPriorityKeyword("");
+      setPriorityFilter("");
+    } else {
+      setKeyword("");
+      setFilter("");
+    }
     getComplaints(category, true, ispriority);
   };
 
   const handleSearch = async (ispriority) => {
     const key = ispriority ? priorityKeyword : keyword;
+    const fil = ispriority ? priorityFilter : filter;
+    const filterT = ispriority ? priorityFilterType : filterType;
     console.log(
       "searching for ",
       key,
       " in category ",
       category,
       ispriority,
-      sortOption
+      sortOption,
+      filterT,
+      fil
     );
     try {
       let response = await Axios.post(
@@ -44,6 +64,8 @@ const Viewcategory = () => {
           category,
           ispriority,
           sortOption,
+          filterType: filterT,
+          filter: fil,
         }
       );
 
@@ -55,8 +77,13 @@ const Viewcategory = () => {
       if (response.data.complaints.length === 0) {
         // console.log("no complaints found");
         toast.error("No complaints found");
-        if (ispriority) setPriorityKeyword("");
-        else setKeyword("");
+        if (ispriority) {
+          setPriorityKeyword("");
+          setPriorityFilter("");
+        } else {
+          setKeyword("");
+          setFilter("");
+        }
       } else {
         if (ispriority) {
           setPriorityComplaints(response.data.complaints);
@@ -278,6 +305,25 @@ const Viewcategory = () => {
                 ispriority={true}
               />
 
+              <div className="filter-container">
+                <select
+                  className="filter-select"
+                  value={priorityFilterType}
+                  onChange={(e) => handleFilterChange(e, true)}
+                >
+                  <option value="name">Search by Name</option>
+                  <option value="address">Search by Address</option>
+                </select>
+                <input
+                  type="text"
+                  className="searchbar"
+                  placeholder="Enter keywords"
+                  value={priorityFilter}
+                  onChange={(e) => setPriorityFilter(e.target.value)}
+                />
+                <button onClick={handleSearch.bind(this, true)}>Search</button>
+              </div>
+
               <div className="prioritysearch search">
                 <input
                   type="text"
@@ -293,7 +339,7 @@ const Viewcategory = () => {
                   Search
                 </button>
                 <button onClick={clearFilter.bind(this, true)}>
-                  Clear Filter
+                  Clear Filters
                 </button>
               </div>
             </div>
@@ -323,6 +369,26 @@ const Viewcategory = () => {
                 onSortChange={handleSortChange}
                 ispriority={false}
               />
+
+              <div className="filter-container">
+                <select
+                  className="filter-select"
+                  value={filterType}
+                  onChange={(e) => handleFilterChange(e, false)}
+                >
+                  <option value="name">Search by Name</option>
+                  <option value="address">Search by Address</option>
+                </select>
+                <input
+                  type="text"
+                  className="searchbar"
+                  placeholder="Enter keywords"
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                />
+                <button onClick={handleSearch.bind(this, false)}>Search</button>
+              </div>
+
               <div className="gensearch search">
                 <input
                   type="text"
@@ -338,7 +404,7 @@ const Viewcategory = () => {
                   Search
                 </button>
                 <button onClick={clearFilter.bind(this, false)}>
-                  Clear Filter
+                  Clear Filters
                 </button>
               </div>
             </div>

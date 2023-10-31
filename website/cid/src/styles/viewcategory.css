@@ -287,6 +287,21 @@ select:hover{
     margin-bottom: 20px;
 }
 
+.filter-select{
+    margin-right: 10px;
+}
+
+.filter-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.filter-container button{
+    margin-left: 20px;
+}
+
 .search{
     display: flex;
     align-items: center;

@@ -10,6 +10,7 @@ const cors = require("cors");
 dotenv.config();
 
 //database config
+console.log(process.env.MONGO_URL);
 connectDB();
 
 //rest object

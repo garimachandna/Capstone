@@ -19,13 +19,13 @@ const About = () => {
         <div className="col-md-4">
           <h1 className="about-head">About Us</h1>
           <p className="aboutp text-justify mt-2">
-            StreamlineCID is dedicated to revolutionizing the complaint
-            classification process within the Criminal Investigation Department
-            (CID). We understand the critical role accurate complaint
-            classification plays in ensuring effective law enforcement and
-            investigative outcomes. Our mission is to streamline and optimize
-            the classification system, leveraging cutting-edge technologies to
-            deliver faster, more accurate, and data-driven solutions.
+            शिकायत is dedicated to revolutionizing the complaint classification
+            process within the Criminal Investigation Department (CID). We
+            understand the critical role accurate complaint classification plays
+            in ensuring effective law enforcement and investigative outcomes.
+            Our mission is to streamline and optimize the classification system,
+            leveraging cutting-edge technologies to deliver faster, more
+            accurate, and data-driven solutions.
           </p>
           <p className="aboutp text-justify">
             For further information, collaboration opportunities, or inquiries,

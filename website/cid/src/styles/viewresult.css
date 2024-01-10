@@ -3,6 +3,10 @@
     margin-top: 20px;
 }
 
+.view-title{
+    font-family: 'Caprasimo'  !important;
+}
+
 .viewresult::before{
     content: "";
     position: fixed;

@@ -27,24 +27,7 @@ const Register = () => {
         role: 2,
       }).then((res) => {
         if (res && res.data.success) {
-          Axios.post(`http://localhost:8080/api/login`, {
-            email,
-            password,
-          }).then((res) => {
-            if (res && res.data.success) {
-              toast.success(res.data && res.data.message);
-              setAuth({
-                ...auth,
-                user: res.data.user,
-                token: res.data.token,
-                role: res.data.user.role,
-              });
-              localStorage.setItem("auth", JSON.stringify(res.data));
-              navigate(location.state || "/");
-            } else {
-              toast.error(res.data.message);
-            }
-          });
+          toast.success(res.data && res.data.message);
         } else {
           toast.error(res.data.message);
         }

@@ -9,6 +9,7 @@ const murderModel = require("../models/murder.js");
 const rapeModel = require("../models/rape.js");
 const theftModel = require("../models/theft.js");
 const { count } = require("console");
+const csv = require("fast-csv");
 
 const registerController = async (req, res) => {
   try {
@@ -167,37 +168,50 @@ const uploadController = async (req, res) => {
     var myFile = req.files.myFile;
     console.log("after\n ", myFile);
 
-    // Object.keys(file).forEach(function (key) {
+    data = myFile.data.toString("utf8");
+    data = data.split("\n");
 
-    //add file to the database | complaint model | complaintSchema corresponding to the specific user
-    const complaints = complaintModel.Complaint;
+    csv
+      .parseString(myFile.data, { headers: true })
+      .on("data", async (row) => {
+        // Extract fields from the CSV row
+        const details = Object.values(row);
 
-    // add this complaint to the complaint array of the user
-    const result = await complaints.findOneAndUpdate(
-      { user: req.user._id },
-      { $push: { complaint: myFile } },
-      { new: true }
-      //   (err, result) => {
-      //     if (err) {
-      //       return res.status(422).json({ error: err });
-      //     } else {
-      //       return res.json(result);
-      //     }
-      //   }
-    );
+        // Display the individual fields
+        var name = details[1];
+        var address = details[2];
+        var phone = details[3];
+        var complaint = details[4];
+        console.log("details\n ", details);
+        const complaintData = {
+          complaintText: complaint,
+          name: name,
+          address: address,
+          phone: phone,
+        };
 
-    if (!result) {
-      const complaint = await complaints.create({
-        user: req.user._id,
-        complaint: myFile,
+        const user = req.user;
+
+        console.log("complaintData\n ", complaintData);
+
+        await predictController(
+          {
+            user: user,
+            body: { complaintData },
+          },
+          res
+        );
+      })
+      .on("end", () => {
+        console.log("CSV string successfully processed.");
+        res.status(200).send({
+          success: true,
+          message: "File uploaded successfully",
+        });
+      })
+      .on("error", (error) => {
+        console.error("Error parsing CSV:", error.message);
       });
-    }
-    //send response
-    // alert("File uploaded successfully");
-    return res.status(200).send({
-      message: "Complaint registered successfully",
-      success: true,
-    });
   } catch (err) {
     console.log(`Error: ${err.message}`.bgRed.white);
     res.status(500).send({
@@ -247,29 +261,48 @@ const complaintController = async (req, res) => {
 
     //send response
     // alert("File uploaded successfully");
-    return res.status(200).send({
-      message: "Complaint categorized successfully",
-      success: true,
-    });
+    // return res.status(200).send({
+    //   message: "Complaint categorized successfully",
+    //   success: true,
+    // });
   } catch (err) {
     console.log(`Error: ${err.message}`.bgRed.white);
+    // res.status(500).send({
+    //   success: false,
+    //   message: "Something went wrong",
+    //   error: err.message,
+    // });
+  }
+};
+
+const directPredictController = async (req, res) => {
+  try {
+    await predictController(req, res);
+
+    res.status(200).send({
+      message: "Prediction successful",
+      success: true,
+    });
+  } catch (e) {
     res.status(500).send({
       success: false,
       message: "Something went wrong",
-      error: err.message,
+      error: e.message,
     });
   }
 };
 
 const predictController = async (req, res) => {
   const { spawn } = require("child_process");
-  console.log(req.body);
+  // console.log("req ", req);
+  // console.log(req.body);
   const inputData = req.body.complaintData.complaintText;
   const inputName = req.body.complaintData.name;
   const inputaddress = req.body.complaintData.address;
   const inputphone = req.body.complaintData.phone;
 
   const user = req.user._id;
+  // console.log("user: ", user);
   console.log("input data to predict controller", inputData);
 
   let predictionVal = "";
@@ -292,41 +325,36 @@ const predictController = async (req, res) => {
     );
   });
 
-  setTimeout(() => {
-    console.log("predictionVal: ", predictionVal);
-    // convert string to int
-    let index = predictionVal - "0";
-    console.log("index: ", index);
+  try {
+    setTimeout(async () => {
+      console.log("predictionVal: ", predictionVal);
+      // convert string to int
+      let index = predictionVal - "0";
+      console.log("index: ", index);
 
-    // call complaintController here
-    complaintController(
-      {
-        user: user,
-        prediction: predictionVal,
-        category: predictedCategory[index],
-        complaint: inputData,
-        name: inputName,
-        address: inputaddress,
-        phone: inputphone,
-      },
-      res
-    );
-
-    // res.status(200).send({
-    //   message: "Prediction successful",
-    //   success: true,
-    //   user: user,
-    //   prediction: predictionVal,
-    //   category: predictedCategory[index],
-    //   complaint: inputData,
-    // });
-  }, 7000);
+      // call complaintController here
+      await complaintController(
+        {
+          user: user,
+          prediction: predictionVal,
+          category: predictedCategory[index],
+          complaint: inputData,
+          name: inputName,
+          address: inputaddress,
+          phone: inputphone,
+        },
+        res
+      );
+    }, 15000);
+  } catch (e) {
+    console.log("error in predict controller ", e);
+  }
 
   // Use the model to make predictions from our inputData
   // const prediction = model.predict(inputData);
+  // res.json({ prediction });
 
   // Send back the prediction as a response
-  // res.json({ prediction });
 };
 
 const viewController = async (req, res) => {
@@ -576,6 +604,7 @@ module.exports = {
   loginController,
   forgotPasswordController,
   uploadController,
+  directPredictController,
   predictController,
   complaintController,
   viewController,

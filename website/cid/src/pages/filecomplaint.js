@@ -34,17 +34,22 @@ const Filecomplaint = () => {
     console.log("Complaint Data:", complaintData);
 
     // You can send the complaint data to the backend here
-    const response = await axios.post("http://localhost:8080/api/predict", {
-      complaintData,
-    });
-    console.log("status: ", response);
-    if (response.data.success) {
-      //show success message
-      response.data.message = "File uploaded successfully";
-      alert("Complaint registered successfully!!!!");
-    } else {
-      //show error message
-      response.data.message = "File upload failed";
+    try {
+      const response = await axios.post("http://localhost:8080/api/predict", {
+        complaintData,
+      });
+      console.log("status: ", response);
+      if (response.data.success) {
+        //show success message
+        response.data.message = "File uploaded successfully";
+        alert("Complaint registered successfully!!!!");
+      } else {
+        //show error message
+        console.log(response.data.error);
+        response.data.message = "File upload failed";
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 

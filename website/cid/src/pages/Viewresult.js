@@ -103,7 +103,9 @@ const Viewresult = () => {
 
     <Layout>
       <div className="viewresult">
-        <h1 id="title">View Complaints</h1>
+        <h1 id="title" className="view-title">
+          View Complaints
+        </h1>
         <div className="pieandcard">
           <div className="pie">
             <PieChart data={data} links={links} />

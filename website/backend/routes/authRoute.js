@@ -5,12 +5,13 @@ const {
   loginController,
   forgotPasswordController,
   uploadController,
-  predictController,
+  // predictController,
   viewController,
   priorityController,
   deleteController,
   countController,
   searchController,
+  directPredictController,
 } = require("../controllers/authController.js");
 const fileUpload = require("express-fileupload");
 
@@ -40,7 +41,7 @@ router.post(
   "/predict",
   requireSignIn,
   fileUpload({ createParentPath: true }),
-  predictController
+  directPredictController
 );
 
 //view route

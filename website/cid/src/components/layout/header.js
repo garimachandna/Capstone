@@ -29,7 +29,7 @@ function Header() {
         <div className="container-fluid">
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
             <Link to="/" className="navbar-brand">
-              StreamlineCID
+              शिकायत
             </Link>
           </div>
           <ul
@@ -44,11 +44,18 @@ function Header() {
             </li>
 
             {auth?.user?.role === 2 ? (
-              <li className="nav-item">
-                <NavLink to="/viewresult" className="nav-link ">
-                  View Complaints
-                </NavLink>
-              </li>
+              <>
+                <li className="nav-item">
+                  <NavLink to="/uploadcsv" className="nav-link ">
+                    Upload Complaints
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink to="/viewresult" className="nav-link ">
+                    View Complaints
+                  </NavLink>
+                </li>
+              </>
             ) : (
               <></>
             )}

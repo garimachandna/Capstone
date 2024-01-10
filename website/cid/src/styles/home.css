@@ -36,6 +36,7 @@
     overflow-y: scroll; */
   }
 
+
   h1,
   h2,
   h3,
@@ -120,10 +121,11 @@
 
 #title{
   text-align: center;
-  font-weight: 500;
-  font-family: 'Caprasimo', cursive;
+  font-family: 'caveat', cursive ;
   color: #b39946;
   font-size: 60px;
+  /* margin-left: 20px; */
+  font-weight: bold;
 }
 
 

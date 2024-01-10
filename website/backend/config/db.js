@@ -11,7 +11,7 @@ const connectDB = async () => {
     console.log(
       "connecting to database",
       path.resolve(__dirname, "../.env"),
-      process.env.MONGO_URL
+      process.env
     );
     const conn = await mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,

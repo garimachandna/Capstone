@@ -5,9 +5,12 @@ const morgan = require("morgan");
 const connectDB = require("./config/db.js");
 const authRoutes = require("./routes/authRoute.js");
 const cors = require("cors");
+const path = require("path");
 
 //configure env
-dotenv.config();
+dotenv.config({
+  path: path.resolve(__dirname, "./.env"),
+});
 
 //database config
 console.log(process.env.MONGO_URL);

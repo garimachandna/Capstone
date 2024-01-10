@@ -71,7 +71,10 @@ const Viewresult = () => {
   }, [user, navigate]);
 
   const fetchData = async () => {
-    const response = await axios.post("http://localhost:8080/api/getcount");
+    const response = await axios.post(
+      "https://shikayat.vercel.app/api/getcount"
+    );
+    // const response = await axios.post("http://localhost:8080/api/getcount");
     const data = await response.data.count;
 
     setCount(data);

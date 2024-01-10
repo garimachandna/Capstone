@@ -35,9 +35,13 @@ const Filecomplaint = () => {
 
     // You can send the complaint data to the backend here
     try {
-      const response = await axios.post("http://localhost:8080/api/predict", {
-        complaintData,
-      });
+      const response = await axios.post(
+        "https://shikayat.vercel.app/api/predict",
+        // const response = await axios.post("http://localhost:8080/api/predict",
+        {
+          complaintData,
+        }
+      );
       console.log("status: ", response);
       if (response.data.success) {
         //show success message

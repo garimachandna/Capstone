@@ -20,12 +20,16 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      Axios.post(`http://localhost:8080/api/register`, {
-        name,
-        email,
-        password,
-        role: 2,
-      }).then((res) => {
+      Axios.post(
+        `https://shikayat.vercel.app/api/register`,
+        // Axios.post(`http://localhost:8080/api/register`,
+        {
+          name,
+          email,
+          password,
+          role: 2,
+        }
+      ).then((res) => {
         if (res && res.data.success) {
           toast.success(res.data && res.data.message);
         } else {

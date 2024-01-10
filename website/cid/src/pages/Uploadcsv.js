@@ -35,7 +35,8 @@ class Uploadcsv extends Component {
       // Send formData object
       console.log("before ", formData.get("myFile"));
       const response = await axios.post(
-        "http://localhost:8080/api/uploadfile",
+        "https://shikayat.vercel.app/api/uploadfile",
+        // "http://localhost:8080/api/uploadfile",
         formData
       );
 

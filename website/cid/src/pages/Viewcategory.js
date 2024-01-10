@@ -58,7 +58,8 @@ const Viewcategory = () => {
     );
     try {
       let response = await Axios.post(
-        "http://localhost:8080/api/findcomplaints", //findcomplaints
+        "https://shikayat.vercel.app/api/findcomplaints", //findcomplaints
+        // "http://localhost:8080/api/findcomplaints", //findcomplaints
         {
           keyword: key,
           category,
@@ -123,36 +124,38 @@ const Viewcategory = () => {
   const getComplaints = (category, isnull = false, ispriority = false) => {
     console.log("finding for category ", category);
     try {
-      Axios.post("http://localhost:8080/api/viewcategory", { category }).then(
-        (res) => {
-          if (res && res.data.success) {
-            console.log("res ", res.data);
+      Axios.post(
+        "https://shikayat.vercel.app/api/viewcategory",
+        // "http://localhost:8080/api/viewcategory",
+        { category }
+      ).then((res) => {
+        if (res && res.data.success) {
+          console.log("res ", res.data);
 
-            console.log(keyword, priorityKeyword);
+          console.log(keyword, priorityKeyword);
 
-            if (isnull === false) {
-              setComplaints(res.data.complaints);
-              setPriorityComplaints(res.data.prioritycomplaints);
-            }
-
-            if (isnull && !ispriority) {
-              console.log("setting complaints");
-              setComplaints(res.data.complaints);
-              console.log("complaints ", complaints);
-            }
-
-            if (isnull && ispriority) {
-              setPriorityComplaints(res.data.prioritycomplaints);
-              console.log("priority complaints ", priorityComplaints);
-            }
-
-            // console.log("complaints ", complaints);
-            // console.log("priority complaints ", priorityComplaints);
-          } else {
-            console.log("some error occured");
+          if (isnull === false) {
+            setComplaints(res.data.complaints);
+            setPriorityComplaints(res.data.prioritycomplaints);
           }
+
+          if (isnull && !ispriority) {
+            console.log("setting complaints");
+            setComplaints(res.data.complaints);
+            console.log("complaints ", complaints);
+          }
+
+          if (isnull && ispriority) {
+            setPriorityComplaints(res.data.prioritycomplaints);
+            console.log("priority complaints ", priorityComplaints);
+          }
+
+          // console.log("complaints ", complaints);
+          // console.log("priority complaints ", priorityComplaints);
+        } else {
+          console.log("some error occured");
         }
-      );
+      });
     } catch (err) {
       console.log(err);
     }
@@ -172,10 +175,14 @@ const Viewcategory = () => {
     // );
 
     console.log("calling priority api");
-    await Axios.post("http://localhost:8080/api/updatepriority", {
-      category,
-      id,
-    }).then((res) => {
+    await Axios.post(
+      "https://shikayat.vercel.app/api/updatepriority",
+      // await Axios.post("http://localhost:8080/api/updatepriority",
+      {
+        category,
+        id,
+      }
+    ).then((res) => {
       if (res && res.data.success) {
         console.log("priority updated");
         console.log("res ", res.data.complaint.priority);
@@ -215,7 +222,8 @@ const Viewcategory = () => {
       })
     );
 
-    Axios.post("http://localhost:8080/api/deletecomplaint", {
+    Axios.post("https://shikayat.vercel.app/api/deletecomplaint", {
+      // Axios.post("http://localhost:8080/api/deletecomplaint", {
       category,
       id,
     }).then((res) => {

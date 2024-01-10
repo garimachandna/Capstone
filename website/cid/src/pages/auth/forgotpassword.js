@@ -17,7 +17,8 @@ const ForgotPassword = () => {
     try {
       // console.log(email, newpassword);
       const res = await Axios.post(
-        `http://localhost:8080/api/forgot-password`,
+        `https://shikayat.vercel.app/api/forgot-password`,
+        // `http://localhost:8080/api/forgot-password`,
         {
           email,
           newpassword,

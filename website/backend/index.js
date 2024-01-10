@@ -16,7 +16,13 @@ connectDB();
 const app = express();
 
 //middlewares
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://shikayat.vercel.app"],
+    methods: ["GET", "POST"],
+    credentials: true, // enable set cookie
+  })
+);
 app.use(express.json());
 app.use(morgan("dev"));
 

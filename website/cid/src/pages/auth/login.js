@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Layout from "../../components/layout/layout";
-import Axios from "axios";
+import Axios, { AxiosHeaders } from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 // import "../../../src/styles/AuthStyles.css";
@@ -14,6 +14,13 @@ const Login = () => {
   const navigate = useNavigate();
   const [auth, setAuth] = useAuth();
   const location = useLocation();
+
+  Axios.defaults.withCredentials = true;
+  Axios.defaults.headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  };
+
   //form function
   const handleSubmit = (e) => {
     e.preventDefault();

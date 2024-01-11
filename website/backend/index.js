@@ -23,6 +23,7 @@ app.use(
     origin: "https://shikayat-frontend.vercel.app",
     methods: ["GET", "POST"],
     credentials: true, // enable set cookie
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(express.json());

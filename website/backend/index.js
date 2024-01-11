@@ -48,17 +48,22 @@ app.use(allowCrossDomain);
 app.use(express.json());
 app.use(morgan("dev"));
 
-//routes
-app.use("/api", authRoutes);
-
 //rest api
 app.get("/", (req, res) => {
   res.send("<h1>Welcome to shikayat app</h1>");
 });
 
+app.options("/api/login", (req, res) => {
+  console.log("OPTIONS SUCCESS");
+  res.send(200);
+});
+
 app.get("/api/login", (req, res) => {
   res.send("<h1>Welcome to shikayat login page</h1>");
 });
+
+//routes
+app.use("/api", authRoutes);
 
 //port
 const port = process.env.PORT || 8080;

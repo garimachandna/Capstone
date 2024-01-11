@@ -22,14 +22,14 @@ const router = express.Router();
 //register | method POST
 router.post("/register", registerController);
 
-//login | method POST
-router.post("/login", loginController);
-
 // login | method options
 router.options("/login", (req, res) => {
   console.log("OPTIONS SUCCESS inside login");
   res.send(200);
 });
+
+//login | method POST
+router.post("/login", loginController);
 
 //forgot password | method POST
 router.post("/forgot-password", forgotPasswordController);

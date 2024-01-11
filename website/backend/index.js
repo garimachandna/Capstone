@@ -55,6 +55,10 @@ app.get("/", (req, res) => {
   res.send("<h1>Welcome to shikayat app</h1>");
 });
 
+app.get("/api/login", (req, res) => {
+  res.send("<h1>Welcome to shikayat login page</h1>");
+});
+
 //port
 const port = process.env.PORT || 8080;
 

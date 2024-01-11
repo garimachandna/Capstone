@@ -15,7 +15,7 @@ const Login = () => {
   const [auth, setAuth] = useAuth();
   const location = useLocation();
 
-  Axios.defaults.withCredentials = true;
+  Axios.defaults.withCredentials = false;
   Axios.defaults.headers = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS",

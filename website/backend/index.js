@@ -19,16 +19,17 @@ const app = express();
 
 //middlewares
 app.use(
-  cors({
-    origin: "https://shikayat-frontend.vercel.app",
-    methods: ["GET", "POST"],
-    credentials: true, // enable set cookie
-    allowedHeaders: ["Content-Type", "Authorization", "Origin", "X-Auth-Token"],
+  cors()
+  //   {
+  //   origin: "https://shikayat-frontend.vercel.app",
+  //   methods: ["GET", "POST"],
+  //   credentials: true, // enable set cookie
+  //   allowedHeaders: ["Content-Type", "Authorization", "Origin", "X-Auth-Token"],
 
-    optionsSuccessStatus: 200,
-    maxAge: 86400, // 24 hours
-    exposedHeaders: ["Authorization, X-Auth-Token, Origin, Content-Type"],
-  })
+  //   optionsSuccessStatus: 200,
+  //   maxAge: 86400, // 24 hours
+  //   exposedHeaders: ["Authorization, X-Auth-Token, Origin, Content-Type"],
+  // }
 );
 app.use(express.json());
 app.use(morgan("dev"));

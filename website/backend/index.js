@@ -16,7 +16,10 @@ connectDB();
 
 var allowCrossDomain = function (req, res, next) {
   console.log("allowCrossDomain");
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Origin",
+    "http://shikayat-frontend.vercel.app"
+  );
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
   res.header("Access-Control-Allow-Headers", "Content-Type");
   if (req.method === "OPTIONS") {

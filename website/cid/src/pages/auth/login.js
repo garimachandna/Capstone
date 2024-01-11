@@ -18,7 +18,7 @@ const Login = () => {
   Axios.defaults.withCredentials = true;
   Axios.defaults.headers = {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": "https://shikayat.vercel.app",
   };
 
   //form function

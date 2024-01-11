@@ -24,6 +24,10 @@ app.use(
     methods: ["GET", "POST"],
     credentials: true, // enable set cookie
     allowedHeaders: ["Content-Type", "Authorization", "Origin", "X-Auth-Token"],
+
+    optionsSuccessStatus: 200,
+    maxAge: 86400, // 24 hours
+    exposedHeaders: ["Authorization, X-Auth-Token, Origin, Content-Type"],
   })
 );
 app.use(express.json());

@@ -15,6 +15,7 @@ console.log(process.env.MONGO_URL);
 connectDB();
 
 var allowCrossDomain = function (req, res, next) {
+  console.log("allowCrossDomain");
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
   res.header("Access-Control-Allow-Headers", "Content-Type");
@@ -31,19 +32,19 @@ const app = express();
 app.use(allowCrossDomain);
 
 //middlewares
-app.use(
-  cors()
-  //   {
-  //   origin: "https://shikayat-frontend.vercel.app",
-  //   methods: ["GET", "POST"],
-  //   credentials: true, // enable set cookie
-  //   allowedHeaders: ["Content-Type", "Authorization", "Origin", "X-Auth-Token"],
+// app.use(
+//   cors()
+//   //   {
+//   //   origin: "https://shikayat-frontend.vercel.app",
+//   //   methods: ["GET", "POST"],
+//   //   credentials: true, // enable set cookie
+//   //   allowedHeaders: ["Content-Type", "Authorization", "Origin", "X-Auth-Token"],
 
-  //   optionsSuccessStatus: 200,
-  //   maxAge: 86400, // 24 hours
-  //   exposedHeaders: ["Authorization, X-Auth-Token, Origin, Content-Type"],
-  // }
-);
+//   //   optionsSuccessStatus: 200,
+//   //   maxAge: 86400, // 24 hours
+//   //   exposedHeaders: ["Authorization, X-Auth-Token, Origin, Content-Type"],
+//   // }
+// );
 app.use(express.json());
 app.use(morgan("dev"));
 

@@ -19,12 +19,11 @@ const app = express();
 
 //middlewares
 app.use(
-  cors()
-  //   {
-  //   origin: "https://shikayat-frontend.vercel.app",
-  //   methods: ["GET", "POST"],
-  //   credentials: true, // enable set cookie
-  // }
+  cors({
+    origin: "https://shikayat-frontend.vercel.app",
+    methods: ["GET", "POST"],
+    credentials: true, // enable set cookie
+  })
 );
 app.use(express.json());
 app.use(morgan("dev"));

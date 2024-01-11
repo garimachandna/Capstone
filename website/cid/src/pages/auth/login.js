@@ -17,8 +17,10 @@ const Login = () => {
 
   // Axios.defaults.withCredentials = true;
   Axios.defaults.headers = {
-    "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS",
+    "Access-Control-Allow-Headers":
+      "Content-Type, Authorization, Origin, X-Auth-Token",
   };
 
   //form function

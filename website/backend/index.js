@@ -8,9 +8,7 @@ const cors = require("cors");
 const path = require("path");
 
 //configure env
-dotenv.config({
-  path: path.resolve(__dirname, "./.env"),
-});
+dotenv.config();
 
 //database config
 console.log(process.env.MONGO_URL);

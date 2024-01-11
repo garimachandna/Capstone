@@ -27,6 +27,7 @@ router.post("/login", loginController);
 
 // login | method options
 router.options("/login", (req, res) => {
+  console.log("OPTIONS SUCCESS inside login");
   res.send(200);
 });
 

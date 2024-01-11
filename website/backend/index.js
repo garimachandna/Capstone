@@ -42,7 +42,7 @@ app.use(allowCrossDomain);
 // app.use(
 //   cors()
 //   //   {
-//   //   origin: "https://shikayat-frontend.vercel.app",
+//   //   origin: "http://shikayat-frontend.vercel.app",
 //   //   methods: ["GET", "POST"],
 //   //   credentials: true, // enable set cookie
 //   //   allowedHeaders: ["Content-Type", "Authorization", "Origin", "X-Auth-Token"],

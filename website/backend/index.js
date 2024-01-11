@@ -65,7 +65,7 @@ app.get("/api/login", (req, res) => {
 });
 
 //routes
-app.use("/api", authRoutes);
+app.use("/api", cors(corsOptions), authRoutes);
 
 //port
 const port = process.env.PORT || 8080;

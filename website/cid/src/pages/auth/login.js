@@ -21,6 +21,19 @@ const Login = () => {
     "Access-Control-Allow-Origin": "https://shikayat.vercel.app",
   };
 
+  // check if axios method is options
+  Axios.interceptors.request.use((config) => {
+    if (config.method === "options") {
+      config.headers["Access-Control-Allow-Origin"] =
+        "https://shikayat.vercel.app";
+      config.headers["Access-Control-Allow-Headers"] =
+        "X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization, Access-Control-Allow-Origin, Access-Control-Allow-Credentials, Access-Control-Allow-Headers, Access-Control-Allow-Method";
+      // set status to HTTP/1.1 200 OK
+      config.headers["Access-Control-Max-Age"] = 86400;
+    }
+    return config;
+  });
+
   //form function
   const handleSubmit = (e) => {
     e.preventDefault();

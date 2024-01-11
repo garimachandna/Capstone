@@ -29,6 +29,13 @@ var allowCrossDomain = function (req, res, next) {
 //rest object
 const app = express();
 
+const corsOptions = {
+  origin: true,
+  credentials: true,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.options("*", cors(corsOptions));
+
 app.use(allowCrossDomain);
 
 //middlewares
@@ -51,11 +58,6 @@ app.use(morgan("dev"));
 //rest api
 app.get("/", (req, res) => {
   res.send("<h1>Welcome to shikayat app</h1>");
-});
-
-app.options("/api/login", (req, res) => {
-  console.log("OPTIONS SUCCESS");
-  res.send(200);
 });
 
 app.get("/api/login", (req, res) => {

@@ -20,7 +20,7 @@ const app = express();
 //middlewares
 app.use(
   cors({
-    origin: ["https://shikayat-frontend.vercel.app"],
+    origin: "https://shikayat-frontend.vercel.app",
     methods: ["GET", "POST"],
     credentials: true, // enable set cookie
   })

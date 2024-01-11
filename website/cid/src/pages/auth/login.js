@@ -26,7 +26,7 @@ const Login = () => {
     e.preventDefault();
     try {
       Axios.post(
-        `https://shikayat.vercel.app/api/login`,
+        `https://shikayat.vercel.app/api/login/`,
         // Axios.post(`http://localhost:8080/api/login`,
         {
           email,

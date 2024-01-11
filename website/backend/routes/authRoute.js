@@ -1,5 +1,6 @@
 const express = require("express");
 const { requireSignIn, isAdmin } = require("../middlewares/authMiddleware.js");
+const cors = require("cors");
 const {
   registerController,
   loginController,
@@ -23,10 +24,7 @@ const router = express.Router();
 router.post("/register", registerController);
 
 // login | method options
-router.options("/login", (req, res) => {
-  console.log("OPTIONS SUCCESS inside login");
-  res.send(200);
-});
+router.options("*", cors());
 
 //login | method POST
 router.post("/login", loginController);

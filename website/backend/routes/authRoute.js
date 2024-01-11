@@ -25,6 +25,11 @@ router.post("/register", registerController);
 //login | method POST
 router.post("/login", loginController);
 
+// login | method options
+router.options("/login", (req, res) => {
+  res.send(200);
+});
+
 //forgot password | method POST
 router.post("/forgot-password", forgotPasswordController);
 
